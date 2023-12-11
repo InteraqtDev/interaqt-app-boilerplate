@@ -8,7 +8,8 @@
     "build": "rimraf dist && tsc -p tsconfig.prod.json",
     "install": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/install.js | pino-pretty",
     "start": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/server.js | pino-pretty",
-    "istart": "npm run install && npm run start"
+    "istart": "npm run install && npm run start",
+    "dashboard": "cd dashboard && npm start"
   },
   "author": "",
   "license": "ISC",

@@ -35,18 +35,24 @@ export class Router {
             this.router.notFound(() => {
                 this.router.navigate(config!.defaultPath)
             })
+                // Promise.resolve().then(() => {
+                //     if (!this.router.lastResolved()) {
+                //         this.router.navigate(config!.defaultPath)
+                //     }
+                // })
 
-            Promise.resolve().then(() => {
-                this.router.navigate(config!.defaultPath)
-            })
         }
+
+        this.router.resolve()
     }
     genGoto(path: string, params = {}) {
         const link = this.router.generate(path, params)
         return () => {
-            console.log("goto", link)
             this.router.navigate(link)
         }
+    }
+    genLink(path: string, params = {}) {
+        return this.router.generate(path, params)
     }
     genAtoms(path:string, atomName:string) {
 
@@ -60,6 +66,9 @@ export class Router {
     render(createElement: (component: Component, data: Props) => any) {
         return () => {
             const ActiveComponent = this.pathToComponents[this.activePath()]
+
+            console.log(this.activePath())
+
             if (!ActiveComponent) return null
 
             const {data} = this.activeMatch() || {}
