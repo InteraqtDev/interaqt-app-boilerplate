@@ -10,11 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "@interaqt/shared": "^1.0.11",
+    "animate.css": "^4.1.1",
     "axii": "^2.0.2",
     "navigo": "^8.11.1",
     "vite": "^5.0.6"
   },
   "devDependencies": {
+    "@interaqt/storage": "^1.0.2",
     "autoprefixer": "^10.4.16",
     "tailwindcss": "^3.3.6"
   }

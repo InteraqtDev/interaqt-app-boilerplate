@@ -59,17 +59,19 @@ export function DatabasePage(props: Props, { createElement }: InjectHandles) {
                 <h1 class="text-base font-semibold leading-7 text-white">Database Tables</h1>
             </header>
 
-            <ul role="list" class="divide-y divide-white/5">
+            <ul role="list" class="divide-y divide-white/5 space-y-16">
                 {() => {
                     return Object.entries(tables() as Tables).map(([name, tableContent]) => (
                         <li class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
                             <div class="min-w-0 flex-auto">
                                 <div class="flex items-center gap-x-3">
-                                    <h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
+                                    <h2 class="min-w-0 text-xl font-semibold leading-6 text-white">
                                         <a href="#" class="flex gap-x-2">
-                                            <span class="truncate">{name}</span>
-                                            <span>[{tableContent.records.join(' | ')}]</span>
+                                            {name}
                                         </a>
+                                        <div class="min-w-0 text-sm">
+                                            [{tableContent.records.join(' | ')}]
+                                        </div>
                                     </h2>
                                 </div>
 

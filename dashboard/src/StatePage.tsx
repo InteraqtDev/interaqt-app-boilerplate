@@ -5,20 +5,17 @@ import {createInstances, State, Property,Relation ,KlassInstance} from "@interaq
 /* @jsx createElement */
 export function StatePage(props: Props, { createElement }: InjectHandles) {
 
-    const instancesByName = atom({})
+    const states = atom([])
 
     ;(async function() {
         const {dataStr} = await post('/data/getSystemInfo', [])
         const allInstances = [...createInstances(JSON.parse(dataStr)).values()]
 
-        const dataByName = allInstances.reduce<{[k:string]: any}>((result, instance) => {
-            return {
-                ...result,
-                [instance._type]: [...result[instance._type] || [], instance]
-            }
-        }, {})
+        const statesData = allInstances.filter((instance) => {
+            return instance._type === 'State'
+        })
 
-        instancesByName(dataByName)
+        states(statesData)
     })()
 
 
@@ -46,11 +43,11 @@ export function StatePage(props: Props, { createElement }: InjectHandles) {
                                             </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-800">
-                                            { Object.entries(instancesByName().states||{} as {[k:string]: KlassInstance<typeof State, false>}).map(([name, state]) => (
+                                            { () => states().map((state: KlassInstance<typeof State, false>) => (
                                                 <tr class="divide-x divide-gray-800">
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white ">{state.name}</td>
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{state.type}</td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{state.collection}</td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{state.collection ? 'true': ''}</td>
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{state.computedData?._type}</td>
                                                 </tr>
                                             ))}

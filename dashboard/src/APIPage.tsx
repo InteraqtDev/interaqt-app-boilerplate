@@ -1,46 +1,183 @@
 import {atom, InjectHandles, Props} from 'axii'
 import {post} from './utils/post.js';
+import {PORT} from "../../config.js";
+import {EventPayload, EventQuery} from "../../../interaqt/packages/runtime/types/interaction.js";
+import LinkIcon from "./icons/Link.js";
+import EntityIcon from "./icons/Entity.js";
+import LockIcon from "./icons/Lock.js";
+import {createInstances, KlassInstance, PayloadItem} from "@interaqt/shared";
+
+type DataAPIs = {
+    [k:string]: {
+        params: string[],
+        allowAnonymous: boolean
+    }
+}
 
 /* @jsx createElement */
 export function APIPage(props: Props, { createElement }: InjectHandles) {
-
+    const dataAPIS = atom({} as DataAPIs)
+    ;(async function() {
+        const {apis} = await post('/data/getSystemInfo', [])
+        dataAPIS(apis)
+    })()
     return (
         <main class="lg">
             <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
                 <h1 class="text-base font-semibold leading-7 text-white">API</h1>
             </header>
 
+            <div class="divide-y space-y-16 divide-gray-800">
 
-            <ul role="list" class="divide-y divide-white/5">
-                <li class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
-                    <div class="min-w-0 flex-auto">
-                        <div class="flex items-center gap-x-3">
-                            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
-                                <div class="h-2 w-2 rounded-full bg-current"></div>
-                            </div>
-                            <h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
-                                <a href="#" class="flex gap-x-2">
-                                    <span class="truncate">Planetaria</span>
-                                    <span class="text-gray-400">/</span>
-                                    <span class="whitespace-nowrap">ios-app</span>
-                                    <span class="absolute inset-0"></span>
-                                </a>
-                            </h2>
-                        </div>
-                        <div class="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">
-                            <p class="truncate">Deploys from GitHub</p>
-                            <svg viewBox="0 0 2 2" class="h-0.5 w-0.5 flex-none fill-gray-300">
-                                <circle cx="1" cy="1" r="1" />
-                            </svg>
-                            <p class="whitespace-nowrap">Initiated 1m 32s ago</p>
-                        </div>
+                <div>
+                    <div class="flex items-center gap-x-3 px-6 py-4">
+                        <h2 class="min-w-0 text-lg font-semibold leading-6 text-white ">
+                            <a class="flex gap-x-2 cursor-pointer">
+                                Interaction API
+                            </a>
+                        </h2>
+                        <a href="/interaction" class="text-white underline cursor-pointer">
+                            See all interaction api in [Interaction]
+                        </a>
                     </div>
-                    <div class="rounded-full flex-none py-1 px-2 text-xs font-medium ring-1 ring-inset text-gray-400 bg-gray-400/10 ring-gray-400/20">Preview</div>
-                    <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                    </svg>
-                </li>
-            </ul>
+
+                    <div class="inline-block mx-6 mt-4 ring-1 ring-gray-800 rounded ">
+                        <table class=" divide-y divide-gray-700">
+                            <tbody class="divide-y divide-gray-800">
+                            <tr class="divide-x divide-gray-800">
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Endpoint</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                    <a class="" >
+                                        http://[host]:{PORT}/api
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="divide-x divide-gray-800">
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">method</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                    <a class="">
+                                        POST
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="divide-x divide-gray-800">
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Body</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+<pre>
+{`type APIBody = {
+    activity?: string,
+    interaction? : string,
+    activityId?: string,
+    payload?: {[k: string]: any},
+    query?: {  // only for get interaction api
+        orderBy?: [string, 'asc' | 'desc'][],
+        limit?: number,
+        offset?: number,
+    }
+}`}
+</pre>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-x-3 px-6 py-4">
+                        <h2 class="min-w-0 text-lg font-semibold leading-6 text-white ">
+                            <a class="flex gap-x-2 cursor-pointer">
+                                Data API
+                            </a>
+                        </h2>
+                    </div>
+
+                    <div class="flex items-center gap-x-3 px-6 py-4">
+                        <h2 class="min-w-0 text-sm font-semibold leading-6 text-white ">
+                            <a class="flex gap-x-2 cursor-pointer">
+                                Basic Information
+                            </a>
+                        </h2>
+                    </div>
+
+                    <div class=" inline-block  mx-6 mt-4 ring-1 ring-gray-800 rounded">
+                        <table class=" divide-y divide-gray-700">
+                            <tbody class="divide-y divide-gray-800">
+                            <tr class="divide-x divide-gray-800">
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Endpoint</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                    <a class="" >
+                                        http://[host]:{PORT}/data/{`{apiName}`}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="divide-x divide-gray-800">
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">method</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                    <a class="">
+                                        POST
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="divide-x divide-gray-800">
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Body</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+<pre>
+{`type DataAPIBody = any[]`}
+</pre>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="flex items-center gap-x-3 px-6 py-4">
+                        <h2 class="min-w-0 text-sm font-semibold leading-6 text-white ">
+                            <a class="flex gap-x-2 cursor-pointer">
+                                Available APIs
+                            </a>
+                        </h2>
+                    </div>
+
+                    <div class="mx-6 mt-4 ring-1 ring-gray-800 rounded">
+                            <table class="min-w-full divide-y divide-gray-700">
+                                <thead class="">
+                                <tr class="divide-x divide-gray-800">
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white">API Name</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Params</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Allow Anonymous</th>
+                                </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-800">
+                                {() => Object.entries(dataAPIS() as DataAPIs).map(([name, dataAPI]) => (
+                                    <tr class="divide-x divide-gray-800">
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white ">
+                                            <div>
+                                                {name}
+                                            </div>
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                            <div>{dataAPI.params?.join(',')}</div>
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                            {dataAPI.allowAnonymous ? 'true' : ''}
+                                        </td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
         </main>
     )
 }

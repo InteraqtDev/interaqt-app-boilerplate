@@ -1,169 +1,210 @@
-import {atom, InjectHandles, Props} from 'axii'
+import {atom, computed, InjectHandles, Props} from 'axii'
 import {post} from './utils/post.js';
-import {createInstances, Entity, Property,Relation ,KlassInstance} from "@interaqt/shared";
+import {createInstances, Entity, Property, Relation, KlassInstance, ComputedData} from "@interaqt/shared";
 import EntityIcon from "./icons/Entity";
+import LinkIcon from "./icons/Link";
+import LockIcon from "./icons/Lock";
+import {MapData, RecordAttribute} from "@interaqt/storage";
+import 'animate.css'
+
+
+type NameToEntity = {
+    [k:string] : KlassInstance<typeof Entity, false>
+}
 
 /* @jsx createElement */
 export function EntityPage(props: Props, { createElement }: InjectHandles) {
 
-    const instancesByName = atom({})
+    const instancesByName = atom({} as NameToEntity)
+    const dbMap = atom({} as MapData)
+    const hash = atom('')
 
     ;(async function() {
         const {dataStr, map} = await post('/data/getSystemInfo', [])
         const allInstances = [...createInstances(JSON.parse(dataStr)).values()]
 
         const dataByName = allInstances.reduce<{[k:string]: any}>((result, instance) => {
+            if (instance._type !== 'Entity') return result
+
             return {
                 ...result,
-                [instance._type]: [...result[instance._type] || [], instance]
+                [(instance as KlassInstance<typeof Entity, false>).name]: instance
             }
         }, {})
 
-        console.log(map)
-
         instancesByName(dataByName)
+        dbMap(map)
+
+        window.addEventListener('hashchange', () => {
+            console.log(location.hash.slice(1, Infinity))
+            hash(location.hash.slice(1, Infinity))
+        });
     })()
 
 
     return (
         <main class="lg">
             <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-                <h1 class="text-base text-lg font-semibold leading-7 text-white flex content-center">
+                <h1 class="text-base text-lg font-semibold leading-7 text-white flex content-center ">
                     <EntityIcon />
-                    <span class="ml-2">Entity & Relation</span>
-
+                    <span class="ml-1">Entity</span>
+                    <span class="ml-6"> </span>
+                    <LinkIcon />
+                    <span class="ml-1">Relation</span>
                 </h1>
             </header>
 
-            <ul role="list" class="divide-y divide-white/5">
+            <ul role="list" class="divide-y divide-white/5 space-y-16">
                 {() => {
-                    return instancesByName().Entity?.map((entity: KlassInstance<typeof Entity, false>) => (
-                        <li class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
-                            <div class="min-w-0 flex-auto">
-                                <div class="flex items-center gap-x-3">
-                                    <h2 class="min-w-0 text-lg font-semibold leading-6 text-white">
-                                        <a href="#" class="flex gap-x-2">
-                                            <span class="truncate">{entity.name}</span>
-                                        </a>
-                                    </h2>
-                                </div>
+                    const EntityByName = instancesByName() as NameToEntity
+                    const map = (dbMap()  || {}) as MapData
+                    return Object.entries(map.records||{}).map(([recordName, record]) => {
+                        const Entity = EntityByName[recordName]!
+                        const titleClassName = () => hash() === recordName ? 'min-w-0 text-lg font-semibold leading-6 text-white animate__animated animate__flash' : 'min-w-0 text-lg font-semibold leading-6 text-white'
+                        return (
+                            <li id={recordName} class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
+                                <div class="min-w-0 flex-auto">
+                                    <div class="flex items-center gap-x-3">
+                                        <h2 class={titleClassName}>
+                                            <a class="flex gap-x-2 cursor-pointer" title={record.isRelation ? 'relation' : /^_/.test(recordName) ? 'system record' : 'entity'}>
+                                                    {record.isRelation ? <LinkIcon /> : <EntityIcon />}
+                                                    {/^_/.test(recordName) ? <LockIcon /> : null}
+                                                    {recordName}
+                                                    {/^_/.test(recordName) ? ' [system record]' : ''}
+                                            </a>
+                                        </h2>
+                                    </div>
 
-                                <div class=" flow-root">
-                                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                            <div class="-mx-4 mt-4 ring-1 ring-gray-800 sm:mx-0 sm:rounded-lg">
-                                                <table class="min-w-full divide-y divide-gray-700">
-                                                    <thead class="">
-                                                    <tr class="divide-x divide-gray-800">
-                                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white">Name</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Type</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Collection</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Computed Type</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody class="divide-y divide-gray-800">
-                                                    { entity.properties?.map((property: KlassInstance<typeof Property, false>) => (
+
+                                    {Entity?.computedData?._type ? (
+                                        <div class="min-w-0 text-sm font-semibold leading-6 text-white">
+                                            Computed Type:  {Entity?.computedData?._type}
+                                        </div>
+                                    ) : null}
+
+
+                                    {() => {
+                                        if (record.isRelation) {
+                                            const link = map.links[recordName]
+                                            return (
+                                                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                    <div class="inline-block py-2 align-middle sm:px-6 lg:px-8">
+                                                        <div class="-mx-4 mt-4 ring-1 ring-gray-800 sm:mx-0 sm:rounded-lg">
+                                                            <table class="min-w-full divide-y divide-gray-700">
+                                                                <tbody class="divide-y divide-gray-800">
+                                                                    <tr class="divide-x divide-gray-800">
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">source record</td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                                                            <a class="cursor-pointer underline" href={`#${link.sourceRecord}`}>
+                                                                                {link.sourceRecord}
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="divide-x divide-gray-800">
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">source property</td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                                                            <a class="cursor-pointer underline" href={`#${link.sourceRecord}.${link.sourceProperty}`}>
+                                                                                {link.sourceProperty}
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="divide-x divide-gray-800">
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">relation type</td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{link.relType.join(':')}</td>
+                                                                    </tr>
+                                                                    <tr class="divide-x divide-gray-800">
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">target record</td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                                                            <a class="cursor-pointer underline" href={`#${link.targetRecord}`}>
+                                                                                {link.targetRecord}
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="divide-x divide-gray-800">
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">target property</td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                                                            <a class="cursor-pointer underline" href={`#${link.targetRecord}.${link.targetProperty}`}>
+                                                                                {link.targetProperty}
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        } else {
+                                            return null
+                                        }
+
+                                    }}
+
+                                    <div class="flow-root">
+                                        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                                <div class="-mx-4 mt-4 ring-1 ring-gray-800 sm:mx-0 sm:rounded-lg">
+                                                    <table class="min-w-full divide-y divide-gray-700">
+                                                        <thead class="">
                                                         <tr class="divide-x divide-gray-800">
-                                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white ">{property.name}</td>
-                                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{property.type}</td>
-                                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{property.collection}</td>
-                                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{property.computedData?._type}</td>
+                                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white">Name</th>
+                                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Type</th>
+                                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Collection</th>
+                                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Computed Type</th>
                                                         </tr>
-                                                    ))}
-                                                    </tbody>
-                                                </table>
+                                                        </thead>
+                                                        <tbody class="divide-y divide-gray-800">
+                                                        { Object.entries(record.attributes).map(([name, attribute]) => {
+
+                                                            if ((attribute as RecordAttribute).isRecord) {
+                                                                const recordAttribute = attribute as RecordAttribute
+                                                                const link = map.links[recordAttribute.linkName]
+                                                                const target = recordAttribute.isSource ? link.targetRecord : link.sourceRecord
+                                                                const targetProp = recordAttribute.isSource ? link.targetProperty : link.sourceProperty
+
+                                                                const trClass = () => computed(() => hash() === `${recordName}.${name}` ? 'divide-x divide-gray-800 animate__animated animate__flash' : 'divide-x divide-gray-800')
+
+                                                                return (
+                                                                    <tr class={trClass} id={`${recordName}.${name}`}>
+                                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white ">
+                                                                            <div>
+                                                                                {name}
+                                                                            </div>
+                                                                            <div>[{recordAttribute.relType.join(":")}]</div>
+                                                                            <a class="cursor-pointer underline" href={`#${target}.${targetProp}`}>{target}.{targetProp}</a>
+                                                                        </td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                                                            <div>relation{recordAttribute.isReliance ? '[reliance]' : ''}</div>
+                                                                            <a class="cursor-pointer underline" href={`#${link.recordName}`}>{link.recordName}</a>
+                                                                        </td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"></td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"></td>
+                                                                    </tr>
+                                                                )
+
+                                                            } else {
+
+                                                                const Property = EntityByName[recordName]?.properties.find(p => p.name === name)
+                                                                return (
+                                                                    <tr class="divide-x divide-gray-800">
+                                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white ">{name}</td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{attribute.type}</td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{Property?.collection ? 'true' : ''}</td>
+                                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{Property?.computedData?._type}</td>
+                                                                    </tr>
+                                                                )
+                                                            }
+                                                        })}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    ))
-                }}
-
-                {() => {
-                    return instancesByName().Relation?.map((relation: KlassInstance<typeof Relation, false>) => (
-                        <li class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
-                            <div class="min-w-0 flex-auto">
-                                <div class="flex items-center gap-x-3">
-                                    <h1 class="min-w-0 text-lg font-semibold leading-6 text-white">
-                                        <a href="#" class="flex gap-x-2">
-                                            <span class="truncate">{relation.name}</span>
-                                        </a>
-                                    </h1>
-                                </div>
-
-
-                                <div class=" flow-root">
-                                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                            <div class="-mx-4 mt-4 ring-1 ring-gray-800 sm:mx-0 sm:rounded-lg">
-                                                <table class="min-w-full divide-y divide-gray-700">
-                                                    <thead class="">
-                                                    <tr class="divide-x divide-gray-800">
-                                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white">Source</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Source Property</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Relation Type</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Target Property</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Target</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody class="divide-y divide-gray-800">
-                                                    <tr class="divide-x divide-gray-800">
-                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white ">{relation.source.name}</td>
-                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{relation.sourceProperty}</td>
-                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{relation.relType}</td>
-                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{relation.targetProperty}</td>
-                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{relation.target.name}</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center gap-x-3 mt-4">
-                                    <h2 class="min-w-0 text-sm font-semibold leading-6 text-gray-200">
-                                        <a href="#" class="flex gap-x-2">
-                                            <span class="truncate">
-                                                properties
-                                            </span>
-                                        </a>
-                                    </h2>
-                                </div>
-
-                                <div class=" flow-root">
-                                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                            <div class="-mx-4 mt-4 ring-1 ring-gray-800 sm:mx-0 sm:rounded-lg">
-                                                <table class="min-w-full divide-y divide-gray-700">
-                                                    <thead class="">
-                                                    <tr class="divide-x divide-gray-800">
-                                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white">Name</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Type</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Collection</th>
-                                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Computed Type</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody class="divide-y divide-gray-800">
-                                                    { relation.properties?.map((property: KlassInstance<typeof Property, false>) => (
-                                                        <tr class="divide-x divide-gray-800">
-                                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white ">{property.name}</td>
-                                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{property.type}</td>
-                                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{property.collection}</td>
-                                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{property.computedData?._type}</td>
-                                                        </tr>
-                                                    ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    ))
+                            </li>
+                        )
+                    })
                 }}
             </ul>
         </main>

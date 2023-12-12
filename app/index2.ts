@@ -285,4 +285,5 @@ const getMyPendingRequests = Interaction.create({
 export const entities = [UserEntity, RequestEntity]
 export const relations = [supervisorRelation, sendRequestRelation, reviewerRelation]
 export const interactions = [createInteraction, approveInteraction, getMyPendingRequests]
-
+export const states = []
+export const activities = []

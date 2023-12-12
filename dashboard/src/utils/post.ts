@@ -1,5 +1,5 @@
-import {port} from '../../../config.js'
-const API_ADDR = `http://localhost:${port}`
+import {PORT} from '../../../config.js'
+const API_ADDR = `http://localhost:${PORT}`
 
 
 export const post = async (url: string, data: any, userId?: string) => (await fetch(`${API_ADDR}${url}`, {
