@@ -1,15 +1,15 @@
-import {Controller, createDataAPI, BoolExp, DataAPIContext, stringifyAllInstances} from "@interaqt/runtime";
+import {Controller, createDataAPI, BoolExp, DataAPIContext, stringifyAllInstances, DataAPI} from "@interaqt/runtime";
 
 export async function createInitialData(controller: Controller) {
     const system = controller.system
     const userARef = await system.storage.create('User', {name: 'A'})
-    const userBRef = await system.storage.create('User', {name: 'B', supervisor: userARef})
-    const userCRef = await system.storage.create('User', {name: 'C', supervisor: userBRef})
+    // const userBRef = await system.storage.create('User', {name: 'B', supervisor: userARef})
+    // const userCRef = await system.storage.create('User', {name: 'C', supervisor: userBRef})
 }
 
 
 
-export const apis = {
+export const apis: {[k:string]: DataAPI } = {
     getUsers: createDataAPI(function getUsers(this: Controller) {
         return this.system.storage.find('User', undefined, undefined, ['*'])
     }, { allowAnonymous: true }),
@@ -24,6 +24,12 @@ export const apis = {
         return {
             dataStr: stringifyAllInstances(),
             map: this.system.storage.map,
+            apis: Object.fromEntries(Object.entries(apis as {[k:string]: DataAPI }).map(([name, api]) => {
+                return [name, {
+                    params: api.params?.map(param => typeof param === 'string' ? param : param.toString()) ,
+                    allowAnonymous: api.allowAnonymous
+                }]
+            }))
         }
     }, { allowAnonymous: true }),
 
