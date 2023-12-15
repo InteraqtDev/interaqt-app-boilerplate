@@ -1,1 +1,1 @@
-export * from '../examples/createFriendRelation.js'
+export  *  from '../examples/schoolManagement.2.js'

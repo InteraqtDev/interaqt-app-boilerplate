@@ -7,16 +7,22 @@
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.prod.json",
     "install": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/install.js | pino-pretty",
+    "force-install": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/install.js -f | pino-pretty",
     "start": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/server.js | pino-pretty",
     "istart": "npm run install && npm run start",
+    "dev": "npm run force-install && nodemon --experimental-modules --es-module-specifier-resolution=node dist/server.js | pino-pretty",
     "dashboard": "cd dashboard && npm start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@interaqt/runtime": "^0.8.11",
+    "@interaqt/runtime": "^0.8.14"
+  },
+  "devDependencies": {
     "@types/node": "^20.10.4",
     "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "nodemon": "^3.0.2",
     "pino-pretty": "^10.2.3",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3"

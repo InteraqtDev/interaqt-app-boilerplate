@@ -1,12 +1,19 @@
 import { IncomingHttpHeaders } from 'http';
 import {MonoSystem,Controller, startServer, SQLiteDB} from "@interaqt/runtime";
-import { entities, relations, interactions, states, activities } from './app/index.js'
+import * as appData from './app/index.js'
 import {apis, createInitialData} from "./data.js";
 import {DATABASE_ADDR, PORT} from "./config.js";
 
 const db = new SQLiteDB(DATABASE_ADDR)
 const system = new MonoSystem(db)
-const controller = new Controller(system, entities, relations, activities, interactions, states)
+const data = appData as any
+const controller = new Controller(
+    system, data.entities,
+    data.relations|| [],
+    data.activities||[],
+    data.interactions||[],
+    data.states||[]
+)
 await controller.setup()
 await createInitialData(controller)
 

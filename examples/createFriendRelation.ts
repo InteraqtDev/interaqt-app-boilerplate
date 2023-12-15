@@ -1,4 +1,11 @@
-
+import "./user.js";
+import "./createFriendRelationActivity.js";
+import "./messageEntity.js";
+import "./requestEntity.js";
+import "./roles.js";
+import "./states.js";
+import "./friend.js";
+import "./post.js"
 import {
     Action,
     Activity,
@@ -13,10 +20,11 @@ import {
     Entity,
     Every,
     Interaction,
-    MapActivityToRecord,
-    MapInteractionToProperty,
-    MapInteractionToPropertyItem,
-    MapRecordMutationToRecord,
+    MapActivity,
+    MapActivityItem,
+    MapInteraction,
+    MapInteractionItem,
+    MapRecordMutation,
     Payload,
     PayloadItem,
     Property,
@@ -29,13 +37,17 @@ import {
     RelationStateMachine,
     RelationStateNode,
     RelationStateTransfer,
+    removeAllInstance,
     State,
+    stringifyAllInstances,
     Transfer,
     USER_ENTITY
 } from "@interaqt/runtime";
 
 const userRefA = createUserRoleAttributive({name: 'A', isRef: true})
 
+export const data = JSON.parse(stringifyAllInstances())
+removeAllInstance()
 export const userRefB = createUserRoleAttributive({name: 'B', isRef: true})
 export const messageEntity = Entity.create({
     name: 'Message',
@@ -72,8 +84,7 @@ export const sendInteraction = Interaction.create({
                 name: 'to',
                 attributives: boolExpToAttributives(BoolExp.atom(OtherAttr)),
                 base: UserEntity,
-                itemRef: userRefB,
-                isRef: true
+                itemRef: userRefB
             }),
             PayloadItem.create({
                 name: 'message',
@@ -242,25 +253,31 @@ export const friendRelation = Relation.create({
     relType: 'n:n',
     computedData: friendRelationSM
 })
-export const mapFriendActivityToRequest = MapActivityToRecord.create({
-    sourceActivity: createFriendRelationActivity,
-    triggerInteraction: [sendInteraction, approveInteraction, rejectInteraction],
-    handle: function map(stack) {
-        const sendRequestEvent = stack.find((i: any) => i.interaction.name === 'sendRequest')
+export const mapFriendActivityToRequest = MapActivity.create({
+    items: [
+        MapActivityItem.create({
+            activity: createFriendRelationActivity,
+            triggerInteractions: [sendInteraction, approveInteraction, rejectInteraction],
 
-        if (!sendRequestEvent) {
-            return undefined
-        }
+            handle: (stack) => {
+                const sendRequestEvent = stack.find((i: any) => i.interaction.name === 'sendRequest')
 
-        const handled = !!stack.find((i: any) => i.interaction.name === 'approve' || i.interaction.name === 'reject')
+                if (!sendRequestEvent) {
+                    return undefined
+                }
 
-        return {
-            from: sendRequestEvent.data.user,
-            to: sendRequestEvent.data.payload.to,
-            message: sendRequestEvent.data.payload.message,
-            handled,
-        }
-    }
+                const handled = !!stack.find((i: any) => i.interaction.name === 'approve' || i.interaction.name === 'reject')
+
+                return {
+                    from: sendRequestEvent.data.user,
+                    to: sendRequestEvent.data.payload.to,
+                    message: sendRequestEvent.data.payload.message,
+                    handled,
+                }
+            }
+        })
+    ],
+
 })
 
 export const requestEntity = Entity.create({
@@ -289,12 +306,12 @@ export const receivedRequestRelation = Relation.create({
         name: 'result',
         type: 'string',
         collection: false,
-        computedData: MapInteractionToProperty.create({
+        computedData: MapInteraction.create({
             items: [
-                MapInteractionToPropertyItem.create({
+                MapInteractionItem.create({
                     interaction: approveInteraction,
                     handle: () => 'approved',
-                    computeSource: async function (this: Controller, event, activityId) {
+                    computeTarget: async function (this: Controller, event, activityId) {
                         const {BoolExp} = this.globals
                         const match = BoolExp.atom({
                             key: 'activity.id',
@@ -308,10 +325,10 @@ export const receivedRequestRelation = Relation.create({
                         }
                     }
                 }),
-                MapInteractionToPropertyItem.create({
+                MapInteractionItem.create({
                     interaction: rejectInteraction,
                     handle: () => 'rejected',
-                    computeSource: async function (this: Controller, event, activityId) {
+                    computeTarget: async function (this: Controller, event, activityId) {
                         const {BoolExp} = this.globals
                         const match = BoolExp.atom({
                             key: 'activity.id',
@@ -421,7 +438,7 @@ export const postRevisionEntity = Entity.create({
         // 这里测试 title 不可更新，所以 revision 里面不记录。
         Property.create({name: 'content', type: PropertyTypes.String})
     ],
-    computedData: MapRecordMutationToRecord.create({
+    computedData: MapRecordMutation.create({
         handle: async function (this: Controller, event: RecordMutationEvent, events: RecordMutationEvent[]) {
             if (event.type === 'update' && event.recordName === 'Post') {
                 return {
@@ -447,12 +464,12 @@ postEntity.properties.push(
     Property.create({
         name: 'content',
         type: PropertyTypes.String,
-        computedData: MapInteractionToProperty.create({
+        computedData: MapInteraction.create({
             items: [
-                MapInteractionToPropertyItem.create({
+                MapInteractionItem.create({
                     interaction: updatePostInteraction,
                     handle: (event) => { return event.payload.post.content },
-                    computeSource: async function (this: Controller, event) {
+                    computeTarget: async function (this: Controller, event) {
                         return event.payload.post.id
                     }
                 }),
@@ -491,7 +508,11 @@ const anyRequestHandledState = State.create({
         }
     })
 })
-
+export const states = [
+    totalFriendRelationState,
+    everyRequestHandledState,
+    anyRequestHandledState,
+]
 
 UserEntity.properties.push(nameProperty, ageProperty)
 
@@ -534,9 +555,3 @@ requestEntity.properties.push(
         }
     }),
 )
-
-export const entities = [UserEntity, requestEntity, messageEntity, postEntity, postRevisionEntity]
-export const relations = [...Relation.instances]
-export const interactions = [...Interaction.instances]
-export const states = [...State.instances]
-export const activities = [...Activity.instances]

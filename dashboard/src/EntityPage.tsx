@@ -4,9 +4,11 @@ import {createInstances, Entity, Property, Relation, KlassInstance, ComputedData
 import EntityIcon from "./icons/Entity";
 import LinkIcon from "./icons/Link";
 import LockIcon from "./icons/Lock";
+import DatabaseIcon from "./icons/Database";
 import {MapData, RecordAttribute} from "@interaqt/storage";
 import 'animate.css'
-
+import {SlideOvers} from "./utils/SlideOvers.js";
+import RecordDataPanel from "./RecordDataPanel.js";
 
 type NameToEntity = {
     [k:string] : KlassInstance<typeof Entity, false>
@@ -36,11 +38,20 @@ export function EntityPage(props: Props, { createElement }: InjectHandles) {
         dbMap(map)
 
         window.addEventListener('hashchange', () => {
-            console.log(location.hash.slice(1, Infinity))
             hash(location.hash.slice(1, Infinity))
         });
     })()
 
+    const panelVisible = atom(false)
+    const panelTitle = atom('')
+    const selectedRecord = atom('')
+
+
+    const onRecordDataClick = (recordName: string) => {
+        selectedRecord(recordName)
+        panelTitle(`${recordName} data`)
+        panelVisible(true)
+    }
 
     return (
         <main class="lg">
@@ -54,24 +65,31 @@ export function EntityPage(props: Props, { createElement }: InjectHandles) {
                 </h1>
             </header>
 
+            <SlideOvers visible={panelVisible} title={panelTitle}>
+                {() => panelVisible() ? <RecordDataPanel record={selectedRecord} map={dbMap} /> : null}
+            </SlideOvers>
+
             <ul role="list" class="divide-y divide-white/5 space-y-16">
                 {() => {
                     const EntityByName = instancesByName() as NameToEntity
                     const map = (dbMap()  || {}) as MapData
                     return Object.entries(map.records||{}).map(([recordName, record]) => {
                         const Entity = EntityByName[recordName]!
-                        const titleClassName = () => hash() === recordName ? 'min-w-0 text-lg font-semibold leading-6 text-white animate__animated animate__flash' : 'min-w-0 text-lg font-semibold leading-6 text-white'
+                        const titleClassName = () => hash() === recordName ? 'min-w-0 text-lg flex font-semibold leading-6 text-white animate__animated animate__flash' : 'min-w-0 text-lg flex  font-semibold leading-6 text-white'
                         return (
                             <li id={recordName} class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
                                 <div class="min-w-0 flex-auto">
                                     <div class="flex items-center gap-x-3">
-                                        <h2 class={titleClassName}>
+                                        <h2 class={titleClassName} >
                                             <a class="flex gap-x-2 cursor-pointer" title={record.isRelation ? 'relation' : /^_/.test(recordName) ? 'system record' : 'entity'}>
                                                     {record.isRelation ? <LinkIcon /> : <EntityIcon />}
                                                     {/^_/.test(recordName) ? <LockIcon /> : null}
                                                     {recordName}
                                                     {/^_/.test(recordName) ? ' [system record]' : ''}
                                             </a>
+                                            <span class="ml-16 cursor-pointer flex  gap-x-2">
+                                                <button  onClick={() => onRecordDataClick(recordName)} type="button" class="rounded bg-white/10 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-white/20">View data</button>
+                                            </span>
                                         </h2>
                                     </div>
 

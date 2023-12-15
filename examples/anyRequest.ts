@@ -1,16 +1,18 @@
-import {Controller, Action,
+import {
+    Action,
     Attributive,
     BoolExp,
     boolExpToAttributives,
     boolExpToDataAttributives,
+    Controller,
     createUserRoleAttributive,
     DataAttributive,
     Entity,
     GetAction,
     Interaction,
-    MapInteractionToProperty,
-    MapInteractionToPropertyItem,
-    MapInteractionToRecord,
+    InteractionEventArgs,
+    MapInteraction,
+    MapInteractionItem,
     Payload,
     PayloadItem,
     Property,
@@ -18,7 +20,8 @@ import {Controller, Action,
     Relation,
     RelationBasedAny,
     RelationBasedEvery,
-    RelationCount} from "@interaqt/runtime";
+    RelationCount
+} from "@interaqt/runtime";
 
 export const globalUserRole = createUserRoleAttributive({})
 
@@ -107,14 +110,18 @@ const sendRequestRelation = Relation.create({
     target: UserEntity,
     targetProperty: 'request',
     relType: 'n:1',
-    computedData: MapInteractionToRecord.create({
-        sourceInteraction: createInteraction,
-        handle: function map(event: any) {
-            return {
-                source: event.payload.request,
-                target: event.user,
-            }
-        }
+    computedData: MapInteraction.create({
+        items: [
+            MapInteractionItem.create({
+                interaction: createInteraction,
+                handle: function map(event: any) {
+                    return {
+                        source: event.payload.request,
+                        target: event.user,
+                    }
+                }
+            }),
+        ]
     }),
 })
 
@@ -125,34 +132,66 @@ const reviewerRelation = Relation.create({
     target: UserEntity,
     targetProperty: 'request',
     relType: 'n:n',
-    computedData: MapInteractionToRecord.create({
-        sourceInteraction: createInteraction,
-        handle: async function map(this: Controller, event: any) {
-            const {BoolExp} = this.globals
+    computedData: MapInteraction.create({
+        items: [
+            MapInteractionItem.create({
+                interaction: createInteraction,
+                handle: async function map(this: Controller, event: any) {
+                    const {BoolExp} = this.globals
 
-            const match = BoolExp.atom({
-                key: 'id',
-                value: ['=', event.user.id]
-            })
+                    const match = BoolExp.atom({
+                        key: 'id',
+                        value: ['=', event.user.id]
+                    })
 
-            const {supervisor} = await this.system.storage.findOne(
-                'User',
-                match,
-                undefined,
-                [
-                    ['supervisor', {attributeQuery: [['supervisor', {attributeQuery: ['*']}]]}],
-                ]
-            )
+                    const {supervisor} = await this.system.storage.findOne(
+                        'User',
+                        match,
+                        undefined,
+                        [
+                            ['supervisor', {attributeQuery: [['supervisor', {attributeQuery: ['*']}]]}],
+                        ]
+                    )
 
-            return [{
-                source: event.payload.request,
-                target: supervisor,
-            }, {
-                source: event.payload.request,
-                isSecond: true,
-                target: supervisor.supervisor,
-            }]
-        }
+                    return [{
+                        source: event.payload.request,
+                        target: supervisor,
+                    }, {
+                        source: event.payload.request,
+                        isSecond: true,
+                        target: supervisor.supervisor,
+                    }]
+                }
+            }),
+        ],
+
+        // sourceInteraction: createInteraction,
+        // handle: async function map(this: Controller, event: any) {
+        //     const {BoolExp} = this.globals
+        //
+        //     const match = BoolExp.atom({
+        //         key: 'id',
+        //         value: ['=', event.user.id]
+        //     })
+        //
+        //     const {supervisor} = await this.system.storage.findOne(
+        //         'User',
+        //         match,
+        //         undefined,
+        //         [
+        //             ['supervisor', {attributeQuery: [['supervisor', {attributeQuery: ['*']}]]}],
+        //         ]
+        //     )
+        //
+        //     return [{
+        //         source: event.payload.request,
+        //         target: supervisor,
+        //     }, {
+        //         source: event.payload.request,
+        //         isSecond: true,
+        //         target: supervisor.supervisor,
+        //     }]
+        // }
     }),
     properties: [
         Property.create({
@@ -164,12 +203,12 @@ const reviewerRelation = Relation.create({
             name: 'result',
             type: 'string',
             collection: false,
-            computedData: MapInteractionToProperty.create({
+            computedData: MapInteraction.create({
                 items: [
-                    MapInteractionToPropertyItem.create({
+                    MapInteractionItem.create({
                         interaction: approveInteraction,
                         handle: () => 'approved',
-                        computeSource: async function (this: Controller, event) {
+                        computeTarget: async function (this: Controller, event: any) {
 
                             return {
                                 "source.id": event.payload.request.id,
@@ -256,7 +295,7 @@ UserEntity.properties.push(
 
 const MineDataAttr = DataAttributive.create({
     name: 'MyData',
-    content: (event) => {
+    content: (event: InteractionEventArgs) => {
         return {
             key: 'reviewer.id',
             value: ['=', event.user.id]
@@ -266,7 +305,7 @@ const MineDataAttr = DataAttributive.create({
 
 const PendingDataAttr = DataAttributive.create({
     name: 'PendingData',
-    content: (event) => {
+    content: (event: InteractionEventArgs) => {
         return {
             key: 'result',
             value: ['=', 'pending']
@@ -285,5 +324,4 @@ const getMyPendingRequests = Interaction.create({
 export const entities = [UserEntity, RequestEntity]
 export const relations = [supervisorRelation, sendRequestRelation, reviewerRelation]
 export const interactions = [createInteraction, approveInteraction, getMyPendingRequests]
-export const states = []
-export const activities = []
+
