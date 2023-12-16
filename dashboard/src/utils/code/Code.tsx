@@ -8,11 +8,12 @@ type HoverProp = { match : (...arg: any[]) => any, contents: (...arg: any[]) => 
 type CodeProp = {
     options?: Omit<Parameters<typeof monaco.editor.create>[1], 'value'>,
     value: Atom<string>,
+    handle?: Atom<{getValue: ()=>string} |null>
     extraLib?: [string, string],
     hover?: HoverProp[]
 }
 
-export function Code({ value = atom(''), options, extraLib, hover }: CodeProp, { useLayoutEffect} : InjectHandles) {
+export function Code({ value = atom(''), handle = atom(null), options, extraLib, hover }: CodeProp, { useLayoutEffect} : InjectHandles) {
 
     const container = <div style={{minHeight: 200, width: '100%'}}></div>
 
@@ -52,12 +53,19 @@ export function Code({ value = atom(''), options, extraLib, hover }: CodeProp, {
             }
         );
 
+
         editor.addCommand(monaco.KeyCode.KeyS | monaco.KeyMod.CtrlCmd, (e, a) => {
             value(editor.getModel()?.getValue())
         })
 
 
+        handle({
+            getValue: () => editor.getModel()?.getValue()
+        })
+
         return () => {
+            handle(null)
+
             editor.dispose()
         }
     })

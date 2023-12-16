@@ -14,7 +14,7 @@ export default function RecordDataPanel({ record = atom(''), map = atom<MapData|
     const fetchTime = atom<string>(Date.now().toString())
 
     computed(() => {
-        if (record() && map()?.records) {
+        if (record() && map()?.records && fetchTime()){
             const currentRecord = map()?.records[record()]!
             const attributeNames = Object.keys(currentRecord!.attributes!)
             const selfAttributes = attributeNames.filter((name=> !((currentRecord.attributes![name] as RecordAttribute).isRecord) ))
@@ -47,13 +47,17 @@ export default function RecordDataPanel({ record = atom(''), map = atom<MapData|
 
     const value = atom(JSON.stringify(initialValue, null, 2))
     const sending = atom<boolean>(false)
+    const editorRef = atom<any>(null)
+
     const result = atom<any>(null)
     const error = atom<any>(null)
     const xUserId = atom(1)
     const onClickSend = async () => {
         sending(true)
         try {
-            result(await post(`/data/createRecord`, [record(), JSON.parse(value())], xUserId().toString()))
+            const newValue = editorRef()?.getValue()
+
+            result(await post(`/data/createRecord`, [record(), JSON.parse(newValue)], xUserId().toString()))
         } catch (e) {
             error(e)
         }
@@ -72,7 +76,7 @@ export default function RecordDataPanel({ record = atom(''), map = atom<MapData|
         </div>
 
         <div class="w-full mt-6">
-            <Code value={value} options={{language: 'json'}}/>
+            <Code value={value} handle={editorRef} options={{language: 'json'}}/>
         </div>
 
         <div class="mt-6">

@@ -8,8 +8,8 @@ import {post} from "./utils/post.js";
 
 
 export default function InteractionAPIPanel({
-    interaction = atom<KlassInstance<typeof Interaction, false>|null>(null),
-    map = atom<MapData|null>(null)
+    interaction = atom<KlassInstance<typeof Interaction, false>>(null),
+    map = atom<MapData>(null)
 }, {createElement}: InjectHandles
 
 ) {
@@ -27,13 +27,15 @@ export default function InteractionAPIPanel({
 
     const value = atom(JSON.stringify(initialBody, null, 2))
     const sending = atom<boolean>(false)
+    const editorRef = atom<any>(null)
     const result = atom<any>(null)
     const error = atom<any>(null)
     const xUserId = atom(1)
     const onClickSend = async () => {
         sending(true)
         try {
-            result(await post(`/api`, JSON.parse(value()), xUserId().toString()))
+            const newValue = editorRef()?.getValue()
+            result(await post(`/api`, JSON.parse(newValue), xUserId().toString()))
         } catch (e) {
             error(e)
         }
@@ -80,11 +82,17 @@ export default function InteractionAPIPanel({
                 <tr class="divide-x divide-gray-200">
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">Body</td>
                     <td class="">
-<Code value={value} options={{language: 'json'}}/>
+<Code value={value} handle={editorRef} options={{language: 'json'}}/>
                     </td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="mt-6">
+            <button disabled={sending} onClick={onClickSend} type="button" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm disabled:bg-indigo-500 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                {() => sending() ? 'Sending...' : 'Send'}
+            </button>
         </div>
 
         <div class="mt-6">
