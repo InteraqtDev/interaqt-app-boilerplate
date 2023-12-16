@@ -104,7 +104,7 @@ const totalOrdersState = State.create({
     type: 'number',
     computedData: Count.create({
         record: OrderEntity,
-        matchExpression: () => true
+        match: () => true
     })
 });
 
@@ -118,15 +118,15 @@ OrderEntity.properties.push(
             items: [
                 MapInteractionItem.create({
                     interaction: createOrderInteraction,
-                    handle: () => 'created',
+                    map: () => 'created',
                 }),
                 MapInteractionItem.create({
                     interaction: updateOrderInteraction,
-                    handle: (event) => event.payload.order.status,
+                    map: (event) => event.payload.order.status,
                 }),
                 MapInteractionItem.create({
                     interaction: deleteOrderInteraction,
-                    handle: () => 'deleted',
+                    map: () => 'deleted',
                 })
             ]
         })

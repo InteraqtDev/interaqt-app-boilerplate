@@ -212,7 +212,7 @@ DormitoryEntity.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: assignDormitoryInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     dormNumber: event.payload.dormitory.dormNumber,
                     student: event.payload.dormitory.student,
@@ -227,7 +227,7 @@ AttendanceRecordEntity.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: studentCheckInInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     timestamp: event.payload.attendanceRecord.timestamp,
                     student: event.payload.attendanceRecord.student,
@@ -242,7 +242,7 @@ studentGradeRelation.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: recordGradeInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     source: event.payload.grade,
                     target: event.payload.student,
@@ -257,7 +257,7 @@ studentDormitoryRelation.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: assignDormitoryInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     source: event.payload.student,
                     target: event.payload.dormitory,
@@ -272,7 +272,7 @@ studentAttendanceRelation.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: studentCheckInInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     source: event.payload.student,
                     target: event.payload.attendanceRecord,

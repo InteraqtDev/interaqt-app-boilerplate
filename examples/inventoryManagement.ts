@@ -149,7 +149,7 @@ const totalOrdersState = State.create({
     type: PropertyTypes.Number,
     computedData: Count.create({
         record: OrderEntity,
-        matchExpression: (record) => true,
+        match: (record) => true,
     }),
 });
 
@@ -162,23 +162,23 @@ OrderEntity.properties.push(
             items: [
                 MapInteractionItem.create({
                     interaction: placeOrderInteraction,
-                    handle: () => 'Placed',
+                    map: () => 'Placed',
                 }),
                 MapInteractionItem.create({
                     interaction: selectSupplierInteraction,
-                    handle: () => 'Supplier Selected',
+                    map: () => 'Supplier Selected',
                 }),
                 MapInteractionItem.create({
                     interaction: sendOrderInteraction,
-                    handle: () => 'Sent',
+                    map: () => 'Sent',
                 }),
                 MapInteractionItem.create({
                     interaction: receiveOrderInteraction,
-                    handle: () => 'Received',
+                    map: () => 'Received',
                 }),
                 MapInteractionItem.create({
                     interaction: inspectGoodsInteraction,
-                    handle: (event) => event.payload.goods.qualityCheck === 'Passed' ? 'Accepted' : 'Rejected',
+                    map: (event) => event.payload.goods.qualityCheck === 'Passed' ? 'Accepted' : 'Rejected',
                 }),
             ],
         }),

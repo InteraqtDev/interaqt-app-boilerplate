@@ -176,7 +176,7 @@ gradeStudentRelation.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: recordGradeInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     source: event.payload.grade,
                     target: event.payload.student
@@ -190,7 +190,7 @@ dormitoryStudentRelation.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: assignDormitoryInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     source: event.payload.dormitory,
                     target: event.payload.student
@@ -204,7 +204,7 @@ attendanceStudentRelation.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: studentAttendanceInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     source: event.payload.attendanceRecord,
                     target: event.payload.student

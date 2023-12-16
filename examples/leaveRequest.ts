@@ -140,7 +140,7 @@ AttendanceRecordEntity.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: checkInInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     timestamp: event.payload.attendanceRecord.timestamp,
                     type: event.payload.attendanceRecord.type,
@@ -156,7 +156,7 @@ LeaveRequestEntity.computedData = MapInteraction.create({
     items: [
         MapInteractionItem.create({
             interaction: submitLeaveRequestInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     startDate: event.payload.leaveRequest.startDate,
                     endDate: event.payload.leaveRequest.endDate,
@@ -168,7 +168,7 @@ LeaveRequestEntity.computedData = MapInteraction.create({
         }),
         MapInteractionItem.create({
             interaction: approveLeaveRequestInteraction,
-            handle: function map(event: any) {
+            map: function map(event: any) {
                 return {
                     status: 'approved', // 审批后状态为已批准
                 }

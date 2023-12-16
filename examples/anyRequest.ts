@@ -114,7 +114,7 @@ const sendRequestRelation = Relation.create({
         items: [
             MapInteractionItem.create({
                 interaction: createInteraction,
-                handle: function map(event: any) {
+                map: function map(event: any) {
                     return {
                         source: event.payload.request,
                         target: event.user,
@@ -136,7 +136,7 @@ const reviewerRelation = Relation.create({
         items: [
             MapInteractionItem.create({
                 interaction: createInteraction,
-                handle: async function map(this: Controller, event: any) {
+                map: async function map(this: Controller, event: any) {
                     const {BoolExp} = this.globals
 
                     const match = BoolExp.atom({
@@ -164,34 +164,6 @@ const reviewerRelation = Relation.create({
                 }
             }),
         ],
-
-        // sourceInteraction: createInteraction,
-        // handle: async function map(this: Controller, event: any) {
-        //     const {BoolExp} = this.globals
-        //
-        //     const match = BoolExp.atom({
-        //         key: 'id',
-        //         value: ['=', event.user.id]
-        //     })
-        //
-        //     const {supervisor} = await this.system.storage.findOne(
-        //         'User',
-        //         match,
-        //         undefined,
-        //         [
-        //             ['supervisor', {attributeQuery: [['supervisor', {attributeQuery: ['*']}]]}],
-        //         ]
-        //     )
-        //
-        //     return [{
-        //         source: event.payload.request,
-        //         target: supervisor,
-        //     }, {
-        //         source: event.payload.request,
-        //         isSecond: true,
-        //         target: supervisor.supervisor,
-        //     }]
-        // }
     }),
     properties: [
         Property.create({
@@ -207,7 +179,7 @@ const reviewerRelation = Relation.create({
                 items: [
                     MapInteractionItem.create({
                         interaction: approveInteraction,
-                        handle: () => 'approved',
+                        map: () => 'approved',
                         computeTarget: async function (this: Controller, event: any) {
 
                             return {
@@ -232,7 +204,7 @@ RequestEntity.properties.push(
             relation: reviewerRelation,
             relationDirection: 'source',
             notEmpty: true,
-            matchExpression:
+            match:
                 (_, relation) => {
                     return relation.result === 'approved'
                 }
@@ -245,7 +217,7 @@ RequestEntity.properties.push(
         computedData: RelationBasedAny.create({
             relation: reviewerRelation,
             relationDirection: 'source',
-            matchExpression:
+            match:
                 (_, relation) => {
                     return relation.result === 'rejected'
                 }
@@ -270,7 +242,7 @@ UserEntity.properties.push(
         computedData: RelationCount.create({
             relation: reviewerRelation,
             relationDirection: 'target',
-            matchExpression: function (request, relation) {
+            match: function (request, relation) {
                 return request.result === 'pending'
             }
         })
@@ -286,7 +258,7 @@ UserEntity.properties.push(
         computedData: RelationCount.create({
             relation: reviewerRelation,
             relationDirection: 'target',
-            matchExpression: function (request, relation) {
+            match: function (request, relation) {
                 return relation.isSecond && request.result === 'pending'
             }
         })
