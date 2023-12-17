@@ -1,5 +1,6 @@
-# feique
-Interaqt sample OA app.
+# My Interaqt app
+
+From Interaqt-boilerplate
 
 ## start
 
@@ -15,14 +16,14 @@ Start app server:
 npm start
 ```
 
-Start app frontend:
+Start dashboard:
 
 ```bash
-cd client 
+cd dashboard 
 npm start
 ```
 
-If nothing goes wrong, you can see the app at `http://localhost:5173`.    
+If nothing goes wrong, you can see the dashboard at `http://localhost:5173`.    
 Your backend server is at `http://localhost:4000`.    
 Interaction api endpoint is `http://localhost:4000/api`.
 Custom data api endpoint is `http://localhost:4000/data/:apiName`.
