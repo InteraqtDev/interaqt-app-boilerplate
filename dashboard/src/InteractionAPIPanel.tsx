@@ -66,7 +66,7 @@ export default function InteractionAPIPanel({
                 <tr class="divide-x divide-gray-200">
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">x-user-id</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                        <input value={xUserId} type="text" name="x-user-id" id="x-user-id" class="inline-block px-1.5 outline-0 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" />
+                        <input value={xUserId} onchange={(e:InputEvent) => xUserId((e.target as HTMLInputElement)!.value)} type="text" name="x-user-id" id="x-user-id" class="inline-block px-1.5 outline-0 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" />
                     </td>
                 </tr>
                 <tr class="divide-x divide-gray-200">
