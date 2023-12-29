@@ -1,11 +1,5 @@
 import {Controller, createDataAPI, BoolExp, DataAPIContext, stringifyAllInstances, DataAPI} from "@interaqt/runtime";
 
-export async function createInitialData(controller: Controller) {
-    const system = controller.system
-    const userARef = await system.storage.create('User', {name: 'A'})
-    const userBRef = await system.storage.create('User', {name: 'B', supervisor: userARef})
-    const userCRef = await system.storage.create('User', {name: 'C', supervisor: userBRef})
-}
 
 
 

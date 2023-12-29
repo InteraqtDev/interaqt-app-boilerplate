@@ -5,6 +5,13 @@ import { existsSync, unlinkSync } from "fs";
 import chalk from "chalk";
 import {program} from "commander";
 
+async function createInitialData(controller: Controller) {
+    // const system = controller.system
+    // const userARef = await system.storage.create('User', {name: 'A'})
+    // const userBRef = await system.storage.create('User', {name: 'B', supervisor: userARef})
+    // const userCRef = await system.storage.create('User', {name: 'C', supervisor: userBRef})
+}
+
 program.option('-f, --force', 'force install')
     .action(async (options) => {
         console.log(options)
@@ -22,6 +29,7 @@ program.option('-f, --force', 'force install')
             const system = new MonoSystem(db)
             const controller = new Controller(system, entities, relations, activities, interactions, states)
             await controller.setup(true)
+            await createInitialData(controller)
 
             console.log("install successfully")
         } catch (e) {

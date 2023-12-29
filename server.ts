@@ -1,7 +1,7 @@
 import { IncomingHttpHeaders } from 'http';
 import {MonoSystem,Controller, startServer, SQLiteDB} from "@interaqt/runtime";
 import * as appData from './app/index.js'
-import {apis, createInitialData} from "./data.js";
+import {apis} from "./data.js";
 import {DATABASE_ADDR, PORT} from "./config.js";
 
 const db = new SQLiteDB(DATABASE_ADDR)
@@ -15,7 +15,6 @@ const controller = new Controller(
     data.states||[]
 )
 await controller.setup()
-await createInitialData(controller)
 
 startServer(controller, {
     port: PORT,
