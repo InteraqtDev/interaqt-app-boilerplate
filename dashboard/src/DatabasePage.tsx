@@ -21,7 +21,7 @@ export function DatabasePage(props: Props, { createElement }: InjectHandles) {
     const tables = atom({} as Tables)
 
     ;(async function() {
-        const { map } = await post('/data/getSystemInfo', [])
+        const { map } = await post('/api/getSystemInfo', [])
         console.log(map.records)
 
         const dataByTable: Tables = {}

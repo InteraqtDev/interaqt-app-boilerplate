@@ -18,7 +18,7 @@ type DataAPIs = {
 export function APIPage(props: Props, { createElement }: InjectHandles) {
     const dataAPIS = atom({} as DataAPIs)
     ;(async function() {
-        const {apis} = await post('/data/getSystemInfo', [])
+        const {apis} = await post('/api/getSystemInfo', [])
         dataAPIS(apis)
     })()
     return (
@@ -48,7 +48,7 @@ export function APIPage(props: Props, { createElement }: InjectHandles) {
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Endpoint</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                                     <a class="" >
-                                        http://[host]:{PORT}/api
+                                        http://[host]:{PORT}/interaction
                                     </a>
                                 </td>
                             </tr>
@@ -87,7 +87,7 @@ export function APIPage(props: Props, { createElement }: InjectHandles) {
                     <div class="flex items-center gap-x-3 px-6 py-4">
                         <h2 class="min-w-0 text-lg font-semibold leading-6 text-white ">
                             <a class="flex gap-x-2 cursor-pointer">
-                                Data API
+                                Custom API
                             </a>
                         </h2>
                     </div>
@@ -107,7 +107,7 @@ export function APIPage(props: Props, { createElement }: InjectHandles) {
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Endpoint</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                                     <a class="" >
-                                        http://[host]:{PORT}/data/{`{apiName}`}
+                                        http://[host]:{PORT}/api/{`{apiName}`}
                                     </a>
                                 </td>
                             </tr>

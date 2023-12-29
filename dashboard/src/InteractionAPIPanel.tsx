@@ -35,7 +35,7 @@ export default function InteractionAPIPanel({
         sending(true)
         try {
             const newValue = editorRef()?.getValue()
-            result(await post(`/api`, JSON.parse(newValue), xUserId().toString()))
+            result(await post(`/interaction`, JSON.parse(newValue), xUserId().toString()))
         } catch (e) {
             error(e)
         }
@@ -51,7 +51,7 @@ export default function InteractionAPIPanel({
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">Endpoint</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                         <a class="" >
-                            http://[host]:{PORT}/api
+                            http://[host]:{PORT}/interaction
                         </a>
                     </td>
                 </tr>

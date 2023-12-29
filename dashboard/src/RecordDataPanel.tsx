@@ -34,7 +34,7 @@ export default function RecordDataPanel({ record = atom(''), map = atom<MapData|
                 columns.push(...targetSelfAttributes.map(name => ({name: `target.${name}`, index: `target.${name}`})))
             }
 
-            post('/data/getRecords', [record(), undefined, attributeQuery]).then((result: any[]) => {
+            post('/api/getRecords', [record(), undefined, attributeQuery]).then((result: any[]) => {
                 // @ts-ignore
                 data.splice(0, Infinity, ...result)
             })
@@ -57,7 +57,7 @@ export default function RecordDataPanel({ record = atom(''), map = atom<MapData|
         try {
             const newValue = editorRef()?.getValue()
 
-            result(await post(`/data/createRecord`, [record(), JSON.parse(newValue)], xUserId().toString()))
+            result(await post(`/api/createRecord`, [record(), JSON.parse(newValue)], xUserId().toString()))
         } catch (e) {
             error(e)
         }

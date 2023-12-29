@@ -8,7 +8,7 @@ export function StatePage(props: Props, { createElement }: InjectHandles) {
     const states = atom([])
 
     ;(async function() {
-        const {dataStr} = await post('/data/getSystemInfo', [])
+        const {dataStr} = await post('/api/getSystemInfo', [])
         const allInstances = [...createInstances(JSON.parse(dataStr)).values()]
 
         const statesData = allInstances.filter((instance) => {

@@ -95,7 +95,7 @@ function renderInteraction(interaction: KlassInstance<typeof Interaction, false>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Endpoint</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                                 <a class="" >
-                                    http://[host]:{PORT}/api
+                                    http://[host]:{PORT}/interaction
                                 </a>
                             </td>
                         </tr>
@@ -192,7 +192,7 @@ function renderGetInteraction(interaction: KlassInstance<typeof Interaction, fal
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Endpoint</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                                 <a class="" >
-                                    http://[host]:{PORT}/api
+                                    http://[host]:{PORT}/interaction
                                 </a>
                             </td>
                         </tr>
@@ -241,7 +241,7 @@ export function InteractionPage(props: Props, { createElement }: InjectHandles) 
 
 
     ;(async function() {
-        const {dataStr, map} = await post('/data/getSystemInfo', [])
+        const {dataStr, map} = await post('/api/getSystemInfo', [])
         const allInstances = [...createInstances(JSON.parse(dataStr)).values()]
 
         const dataByName = allInstances.reduce<{[k:string]: any}>((result, instance) => {

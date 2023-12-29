@@ -22,7 +22,7 @@ export function EntityPage(props: Props, { createElement }: InjectHandles) {
     const hash = atom('')
 
     ;(async function() {
-        const {dataStr, map} = await post('/data/getSystemInfo', [])
+        const {dataStr, map} = await post('/api/getSystemInfo', [])
         const allInstances = [...createInstances(JSON.parse(dataStr)).values()]
 
         const dataByName = allInstances.reduce<{[k:string]: any}>((result, instance) => {
