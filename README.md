@@ -25,5 +25,5 @@ npm start
 
 If nothing goes wrong, you can see the dashboard at `http://localhost:5173`.    
 Your backend server is at `http://localhost:4000`.    
-Interaction api endpoint is `http://localhost:4000/api`.
-Custom data api endpoint is `http://localhost:4000/data/:apiName`.
+Interaction api endpoint is `http://localhost:4000/interaction`.
+Custom data api endpoint is `http://localhost:4000/api/:apiName`.
