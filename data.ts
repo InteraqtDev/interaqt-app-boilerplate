@@ -12,9 +12,20 @@ export const apis: {[k:string]: DataAPI } = {
             dataStr: stringifyAllInstances(),
             map: this.system.storage.map,
             apis: Object.fromEntries(Object.entries(apis as {[k:string]: DataAPI }).map(([name, api]) => {
+
+                const parseParam = (param: string) => typeof param === 'string' ? param : (param as any)?.toString()
+
+                const paramsStr = api.params ?
+                    (api.useNamedParams ?
+                            Object.fromEntries(Object.entries(api.params).map(([key, param]) => [key, parseParam(param)])):
+                            (api.params as any[]).map(param => typeof param === 'string' ? param : param.toString())
+                    ) :
+                    api.params
+
                 return [name, {
-                    params: api.params?.map(param => typeof param === 'string' ? param : param.toString()) ,
-                    allowAnonymous: api.allowAnonymous
+                    params: paramsStr,
+                    allowAnonymous: api.allowAnonymous,
+                    useNamedParams: api.useNamedParams
                 }]
             }))
         }
