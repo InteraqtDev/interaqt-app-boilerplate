@@ -34,9 +34,9 @@ import {
     RelationBasedAny,
     RelationBasedEvery,
     RelationCount,
-    RelationStateMachine,
-    RelationStateNode,
-    RelationStateTransfer,
+    StateMachine,
+    StateNode,
+    StateTransfer,
     removeAllInstance,
     State,
     stringifyAllInstances,
@@ -196,14 +196,13 @@ export const deleteInteraction = Interaction.create({
     })
 })
 // friend 关系的状态机描述
-const notFriendState = RelationStateNode.create({
-    hasRelation: false
+const notFriendState = StateNode.create({
+    value: null
 })
-const isFriendState = RelationStateNode.create({
-    hasRelation: true
+const isFriendState = StateNode.create({
+    value: {}
 })
-const addFriendTransfer = RelationStateTransfer.create({
-    sourceActivity: createFriendRelationActivity,
+const addFriendTransfer = StateTransfer.create({
     triggerInteraction: approveInteraction,
     fromState: notFriendState,
     toState: isFriendState,
@@ -220,14 +219,13 @@ const addFriendTransfer = RelationStateTransfer.create({
 
         const sendEvent = (await this.system.getEvent(match))[0]
         return {
-            source: sendEvent.args.user,
+            source: sendEvent.user,
             target: eventArgs.user
         }
     }
 
 })
-const deleteFriendTransfer = RelationStateTransfer.create({
-    // sourceActivity: activity,
+const deleteFriendTransfer = StateTransfer.create({
     triggerInteraction: deleteInteraction,
     fromState: isFriendState,
     toState: notFriendState,
@@ -240,7 +238,7 @@ const deleteFriendTransfer = RelationStateTransfer.create({
     }
 
 })
-const friendRelationSM = RelationStateMachine.create({
+const friendRelationSM = StateMachine.create({
     states: [notFriendState, isFriendState],
     transfers: [addFriendTransfer, deleteFriendTransfer],
     defaultState: notFriendState
@@ -260,18 +258,18 @@ export const mapFriendActivityToRequest = MapActivity.create({
             triggerInteractions: [sendInteraction, approveInteraction, rejectInteraction],
 
             map: (stack) => {
-                const sendRequestEvent = stack.find((i: any) => i.interaction.name === 'sendRequest')
+                const sendRequestEvent = stack.find((i: any) => i.interactionName === 'sendRequest')
 
                 if (!sendRequestEvent) {
                     return undefined
                 }
 
-                const handled = !!stack.find((i: any) => i.interaction.name === 'approve' || i.interaction.name === 'reject')
+                const handled = !!stack.find((i: any) => i.interactionName === 'approve' || i.interactionName === 'reject')
 
                 return {
-                    from: sendRequestEvent.data.user,
-                    to: sendRequestEvent.data.payload.to,
-                    message: sendRequestEvent.data.payload.message,
+                    from: sendRequestEvent.user,
+                    to: sendRequestEvent.payload.to,
+                    message: sendRequestEvent.payload.message,
                     handled,
                 }
             }
