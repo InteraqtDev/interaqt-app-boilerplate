@@ -15,7 +15,7 @@ type NameToEntity = {
 }
 
 /* @jsx createElement */
-export function EntityPage(props: Props, { createElement }: InjectHandles) {
+export function EntityPage(props: Props, { createElement, useLayoutEffect }: InjectHandles) {
 
     const instancesByName = atom({} as NameToEntity)
     const dbMap = atom({} as MapData)
@@ -36,11 +36,16 @@ export function EntityPage(props: Props, { createElement }: InjectHandles) {
 
         instancesByName(dataByName)
         dbMap(map)
-
-        window.addEventListener('hashchange', () => {
-            hash(location.hash.slice(1, Infinity))
-        });
     })()
+
+    useLayoutEffect(() => {
+        const listener = () => hash(location.hash.slice(1, Infinity))
+        window.addEventListener('hashchange', listener);
+        return () => {
+            window.removeEventListener('hashchange', listener);
+        }
+    })
+
 
     const panelVisible = atom(false)
     const panelTitle = atom('')

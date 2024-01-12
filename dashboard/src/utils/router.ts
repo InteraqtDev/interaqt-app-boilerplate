@@ -14,8 +14,8 @@ type RouterConfig = {
 
 export class Router {
     public ActiveComponent = atom(null)
-    activeMatch = atom(null)
-    activePath = atom(null)
+    activeMatch = atom<Match>(null)
+    activePath = atom<string>(null)
     router: Navigo
     constructor(public pathToComponents: RouterPath, public config?:RouterConfig ) {
         this.router = new Navigo('/')
@@ -58,21 +58,21 @@ export class Router {
 
         const atomHandle = this.config?.matchAtoms[atomName]
         return computed(() => {
-            const [activeReturn, inactiveReturn] = atomHandle!(this.activeMatch())
+            const [activeReturn, inactiveReturn] = atomHandle!(this.activeMatch()!)
             return this.activePath() === path ? activeReturn : inactiveReturn
         })
 
     }
     render(createElement: (component: Component, data: Props) => any) {
         return () => {
-            const ActiveComponent = this.pathToComponents[this.activePath()]
+            const ActiveComponent = this.pathToComponents[this.activePath()!]
 
             console.log(this.activePath())
 
             if (!ActiveComponent) return null
 
             const {data} = this.activeMatch() || {}
-            return createElement(ActiveComponent, data)
+            return createElement(ActiveComponent, data!)
         }
     }
 
