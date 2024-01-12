@@ -16,7 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@interaqt/runtime": "^0.8.26"
+    "@interaqt/runtime": "^0.8.33",
+    "@types/pg": "^8.10.9"
   },
   "devDependencies": {
     "@types/node": "^20.10.4",
