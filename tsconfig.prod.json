@@ -19,7 +19,7 @@
     "types": ["node"],
   },
   "include": [
-    "./install.ts",
+    "./setup.ts",
     "./server.ts",
     "./data.ts",
     "./config.ts"
