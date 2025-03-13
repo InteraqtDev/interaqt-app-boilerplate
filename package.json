@@ -14,18 +14,18 @@
     "dashboard": "cd dashboard && npm start"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@interaqt/runtime": "^0.8.33",
-    "@types/pg": "^8.10.9"
+    "@interaqt/runtime": "^0.8.33"
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
+    "@types/node": "^22.13.10",
+    "@types/pg": "^8.11.11",
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
     "nodemon": "^3.0.2",
     "pino-pretty": "^10.2.3",
     "rimraf": "^5.0.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.8.2"
   }
 }
