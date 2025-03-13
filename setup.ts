@@ -12,16 +12,16 @@ async function createInitialData(controller: Controller) {
     // const userCRef = await system.storage.create('User', {name: 'C', supervisor: userBRef})
 }
 
-program.option('-f, --force', 'force install')
+program.option('-f, --force', 'force setup')
     .action(async (options) => {
         console.log(options)
         try {
             if (existsSync(DATABASE_ADDR)) {
                 if (!options.force) {
-                    console.log(chalk.red(`${DATABASE_ADDR} already exist, remove it before install`))
+                    console.log(chalk.red(`${DATABASE_ADDR} already exist, remove it before setup`))
                     return
                 } else {
-                    console.log(chalk.red(`force install, will delete ${DATABASE_ADDR}.`))
+                    console.log(chalk.red(`force setup, will delete ${DATABASE_ADDR}.`))
                     unlinkSync(DATABASE_ADDR)
                 }
             }
@@ -31,7 +31,7 @@ program.option('-f, --force', 'force install')
             await controller.setup(true)
             await createInitialData(controller)
 
-            console.log("install successfully")
+            console.log("setup successfully")
         } catch (e) {
             console.error(e)
             process.exit(1)

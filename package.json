@@ -6,11 +6,10 @@
   "type": "module",
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.prod.json",
-    "install": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/install.js | pino-pretty",
-    "force-install": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/install.js -f | pino-pretty",
+    "setup": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/setup.js | pino-pretty",
+    "force-setup": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/setup.js -f | pino-pretty",
     "start": "npm run build && node --experimental-modules --es-module-specifier-resolution=node dist/server.js | pino-pretty",
-    "istart": "npm run install && npm run start",
-    "dev": "npm run force-install && nodemon --experimental-modules --es-module-specifier-resolution=node dist/server.js | pino-pretty",
+    "dev": "npm run force-setup && nodemon --experimental-modules --es-module-specifier-resolution=node dist/server.js | pino-pretty",
     "dashboard": "cd dashboard && npm start"
   },
   "author": "",
