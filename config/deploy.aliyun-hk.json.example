@@ -1,0 +1,128 @@
+{
+  "provider": "aliyun",
+  "environment": "prod",
+  "aliyun": {
+    "region": "cn-hongkong",
+    "ackClusterId": "YOUR_ACK_CLUSTER_ID",
+    "kubeconfigPath": "~/.kube/aliyun-config",
+    "accessKeyId": "YOUR_ALIYUN_ACCESS_KEY_ID",
+    "accessKeySecret": "YOUR_ALIYUN_ACCESS_KEY_SECRET",
+    "vswitchId": "YOUR_VSWITCH_ID",
+    "securityGroupId": "YOUR_SECURITY_GROUP_ID"
+  },
+  "components": {
+    "main": {
+      "deploymentType": "container",
+      "replicas": 3,
+      "host": "0.0.0.0",
+      "port": 3000,
+      "middlewareDependencies": {
+        "mainDb": {
+          "deploymentType": "cloud",
+          "endpoint": "",
+          "config": {
+            "username": "pgadmin",
+            "password": "YOUR_DB_PASSWORD",
+            "database": "litdb",
+            "cloudSpec": {
+              "instanceType": "pg.n2.small.1",
+              "engineVersion": "14.0",
+              "storage": 100,
+              "storageType": "cloud_essd"
+            }
+          }
+        },
+        "objectStorage": {
+          "deploymentType": "cloud",
+          "endpoint": "",
+          "config": {
+            "bucket": "lit-app-storage",
+            "accessKeyId": "YOUR_OSS_ACCESS_KEY_ID",
+            "secretAccessKey": "YOUR_OSS_ACCESS_KEY_SECRET",
+            "cloudSpec": {
+              "storageClass": "Standard",
+              "redundancyType": "LRS"
+            }
+          }
+        },
+        "messageQueue": {
+          "deploymentType": "container",
+          "use": "kafka",
+          "version": "3.8.1",
+          "replicas": 1,
+          "config": {
+            "instanceId": "local-kafka",
+            "username": "",
+            "password": "",
+            "ssl": false
+          }
+        }
+      },
+      "externalServices": {
+        "aliAiImage": {
+          "config": {
+            "apiKey": "YOUR_ALI_AI_API_KEY",
+            "baseUrl": "https://dashscope.aliyuncs.com/api/v1/services/aigc/text2image/image-synthesis",
+            "model": "wanx-v1"
+          }
+        }
+      },
+      "applicationConfig": {
+        "jwt": {
+          "secret": "YOUR_JWT_SECRET_KEY",
+          "userIdField": "username"
+        },
+        "rootUser": {
+          "password": "YOUR_ROOT_USER_PASSWORD"
+        },
+        "nodeEnv": "production"
+      }
+    },
+    "communication": {
+      "deploymentType": "container",
+      "replicas": 2,
+      "host": "0.0.0.0",
+      "port": 3001,
+      "middlewareDependencies": {
+        "redis": {
+          "deploymentType": "container",
+          "use": "redis",
+          "version": "7.0.15",
+          "replicas": 1,
+          "config": {
+            "password": "redis123456"
+          }
+        },
+        "centrifugo": {
+          "deploymentType": "container",
+          "use": "centrifugo",
+          "version": "v6.5.1",
+          "replicas": 1,
+          "dependencies": [
+            "components.communication.middlewareDependencies.redis"
+          ],
+          "config": {
+            "apiKey": "YOUR_CENTRIFUGO_API_KEY",
+            "tokenHmacSecretKey": "YOUR_CENTRIFUGO_TOKEN_SECRET",
+            "engine": "redis",
+            "redisAddress": "${ref:components.communication.middlewareDependencies.redis.endpoint}",
+            "redisPassword": "${ref:components.communication.middlewareDependencies.redis.config.password}",
+            "redisDb": "0",
+            "allowedOrigins": ["https://your-domain.com"]
+          }
+        }
+      },
+      "externalServices": {},
+      "applicationConfig": {}
+    },
+    "asyncTask": {
+      "deploymentType": "container",
+      "replicas": 2,
+      "host": "0.0.0.0",
+      "port": 3002,
+      "middlewareDependencies": {},
+      "externalServices": {},
+      "applicationConfig": {}
+    }
+  }
+}

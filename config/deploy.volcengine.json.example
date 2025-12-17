@@ -1,0 +1,144 @@
+{
+  "provider": "volcengine",
+  "environment": "prod",
+  "volcengine": {
+    "region": "cn-beijing",
+    "vkeClusterId": "YOUR_VKE_CLUSTER_ID",
+    "kubeconfigPath": "~/.kube/volcengine-config",
+    "accessKeyId": "YOUR_VOLCENGINE_ACCESS_KEY_ID",
+    "secretAccessKey": "YOUR_VOLCENGINE_SECRET_ACCESS_KEY",
+    "vpcId": "YOUR_VPC_ID",
+    "subnetId": "YOUR_SUBNET_ID"
+  },
+  "components": {
+    "main": {
+      "deploymentType": "container",
+      "replicas": 3,
+      "host": "0.0.0.0",
+      "port": 3000,
+      "middlewareDependencies": {
+        "mainDb": {
+          "deploymentType": "cloud",
+          "endpoint": "",
+          "config": {
+            "username": "pgadmin",
+            "password": "YOUR_DB_PASSWORD",
+            "database": "litdb",
+            "cloudSpec": {
+              "instanceType": "rds.postgres.s1.medium",
+              "engineVersion": "14",
+              "storage": 100,
+              "storageType": "LocalSSD"
+            }
+          }
+        },
+        "objectStorage": {
+          "deploymentType": "cloud",
+          "endpoint": "",
+          "config": {
+            "bucket": "lit-app-storage",
+            "accessKeyId": "YOUR_TOS_ACCESS_KEY_ID",
+            "secretAccessKey": "YOUR_TOS_SECRET_ACCESS_KEY",
+            "cloudSpec": {
+              "storageClass": "STANDARD"
+            }
+          }
+        },
+        "messageQueue": {
+          "deploymentType": "container",
+          "use": "kafka",
+          "version": "3.8.1",
+          "replicas": 1,
+          "config": {
+            "instanceId": "local-kafka",
+            "username": "",
+            "password": "",
+            "ssl": false
+          }
+        }
+      },
+      "externalServices": {
+        "volcFangzhouImage": {
+          "config": {
+            "apiKey": "YOUR_VOLC_API_KEY",
+            "baseUrl": "https://ark.cn-beijing.volces.com/api/v3/images/generations",
+            "model": "doubao-seedream-4-0-250828"
+          }
+        },
+        "volcFangzhouVideo": {
+          "config": {
+            "apiKey": "YOUR_VOLC_API_KEY",
+            "baseUrl": "https://ark.cn-beijing.volces.com/api/v3/contents/generations/tasks",
+            "model": "doubao-seedance-1-0-pro-fast-251015"
+          }
+        },
+        "volcTts": {
+          "config": {
+            "appId": "YOUR_TTS_APP_ID",
+            "accessToken": "YOUR_TTS_ACCESS_TOKEN",
+            "secretKey": "YOUR_TTS_SECRET_KEY",
+            "resourceId": "seed-tts-2.0",
+            "speaker": "zh_female_meilinvyou_saturn_bigtts",
+            "apiEndpoint": "https://openspeech.bytedance.com/api/v3/tts/unidirectional"
+          }
+        }
+      },
+      "applicationConfig": {
+        "jwt": {
+          "secret": "YOUR_JWT_SECRET_KEY",
+          "userIdField": "username"
+        },
+        "rootUser": {
+          "password": "YOUR_ROOT_USER_PASSWORD"
+        },
+        "nodeEnv": "production"
+      }
+    },
+    "communication": {
+      "deploymentType": "container",
+      "replicas": 2,
+      "host": "0.0.0.0",
+      "port": 3001,
+      "middlewareDependencies": {
+        "redis": {
+          "deploymentType": "container",
+          "use": "redis",
+          "version": "7.0.15",
+          "replicas": 1,
+          "config": {
+            "password": "redis123456"
+          }
+        },
+        "centrifugo": {
+          "deploymentType": "container",
+          "use": "centrifugo",
+          "version": "v6.5.1",
+          "replicas": 1,
+          "dependencies": [
+            "components.communication.middlewareDependencies.redis"
+          ],
+          "config": {
+            "apiKey": "YOUR_CENTRIFUGO_API_KEY",
+            "tokenHmacSecretKey": "YOUR_CENTRIFUGO_TOKEN_SECRET",
+            "engine": "redis",
+            "redisAddress": "${ref:components.communication.middlewareDependencies.redis.endpoint}",
+            "redisPassword": "${ref:components.communication.middlewareDependencies.redis.config.password}",
+            "redisDb": "0",
+            "allowedOrigins": ["https://your-domain.com"]
+          }
+        }
+      },
+      "externalServices": {},
+      "applicationConfig": {}
+    },
+    "asyncTask": {
+      "deploymentType": "container",
+      "replicas": 2,
+      "host": "0.0.0.0",
+      "port": 3002,
+      "middlewareDependencies": {},
+      "externalServices": {},
+      "applicationConfig": {}
+    }
+  }
+}

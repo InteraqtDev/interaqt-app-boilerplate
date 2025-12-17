@@ -1,0 +1,20 @@
+{
+  "name": "@integrations/example_volctts",
+  "version": "1.0.0",
+  "description": "Volcengine Doubao TTS (Text-to-Speech) integration",
+  "type": "module",
+  "main": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.927.0",
+    "@aws-sdk/s3-request-presigner": "^3.927.0"
+  },
+  "peerDependencies": {
+    "interaqt": "^0.8.10",
+    "zod": "^4.0.0"
+  }
+}
+
+

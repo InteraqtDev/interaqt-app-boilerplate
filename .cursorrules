@@ -1,0 +1,41 @@
+# 项目核心规则
+
+## 通用知识
+
+当前项目是基于一个后端响应式框架 interaqt 的项目。它的代码是由 claude code 根据 `CLAUDE.md` 定义的工作流和 `.claude/agents` 中的 agent 生成的。
+它的代码结构是：
+```
+interaqt/
+├── backend/ # 后端代码
+├── frontend/ # 前端代码
+├── tests/ # 测试代码
+├── agentspace/ # 流水线 task-1 ~ task-4 产出的所有文档（需求分析、设计文档、实现计划等）
+├── requirements/ # 原始需求文档（{module}.requirements.md 和 {module}.requirements.frontend.md）
+```
+
+### 文档输出规则
+
+除非用户在任务中明确指定了文档输出目录，否则默认所有的 summary 等在执行任务中产生的过程文档都输出到 `prompt/output` 目录中。
+
+## 具体任务
+
+当用户需要你执行任务时，你先将具体任务分类，然后查找下面对应的指导来完成。
+
+### 流水线排查任务
+项目代码是 claude code sub agents 流水线生产出来的，有时候产出的代码有问题。项目中会有 agent 对每个阶段做错误检测，并生成报告，报告在 `agentspace` 目录下。
+文件名是 `{module}.{task}-error-check-report.md`。
+你先检查下 `agentspace` 目录下是否有这个文件，如果有，先读一下文件内容，理解下问题。
+用户会需要你去排查产出这个阶段的 sub agent 哪里有问题。这个时候你需要到 `.claude/agents` 目录下找到对应的 agent 文件，然后读一下文件内容，理解下 agent 的职责。
+然后你再根据 agent 的职责，到项目代码中找到对应的代码，然后读一下代码内容，理解下代码的逻辑。
+看为什么会出现 report 中的问题。
+
+### 后端代码任务
+有时候，用户会让你手动执行一些后端代码任务。
+后端代码在 `backend` 目录下。你应该先阅读 `agentspace/knowledge/api-reference.md` 学会框架用法，再进行代码任务。
+
+### 前端代码任务
+有时候，用户会让你手动执行一些前端代码任务。
+前端代码在 `frontend` 目录下。
+前端所有可用的 api 是通过 `npm run generate-frontend-api` 生成的。
+生成的文件在 `frontend/api/generated.ts` 和 `frontend/api/custom-endpoints.generated.ts` 中。
+你应该先阅读这两个文件，理解下生成的 api 的用法，再进行代码任务。

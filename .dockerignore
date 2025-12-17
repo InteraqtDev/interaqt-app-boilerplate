@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+dashboard/node_modules/
+
+# Build outputs
+frontend/dist/
+dashboard/dist/
+deploytool/dist/
+
+# Development files
+.env
+.env.development
+.env.local
+*.log
+npm-debug.log*
+
+# Test files
+tests/
+testscripts/
+coverage/
+
+# Development database
+appdb/
+*.db
+*.db-shm
+*.db-wal
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Agent space (development only)
+agentspace/
+.claude/
+
+# Helm charts (not needed in image)
+helm/
+
+# Scripts (not needed in image)
+scripts/
+
+# Requirements (not needed in image)
+requirements/
+
+# Development configs
+vitest.config.ts
+vitest.config.dev.ts
+
+# Wrangler (Cloudflare Workers, not needed for K8s)
+wrangler.toml
+worker.ts
+

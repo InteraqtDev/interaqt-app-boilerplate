@@ -1,0 +1,185 @@
+{
+  "version": "1.0.0",
+  "environment": "dev",
+  "generatedAt": "2025-11-20T10:30:00.000Z",
+  "components": {
+    "main": {
+      "name": "业务逻辑组件",
+      "enabled": true,
+      "host": "localhost",
+      "port": 3000,
+      "publicUrl": "http://localhost:3000",
+      "middlewareDependencies": {
+        "mainDb": {
+          "type": "postgresql",
+          "deploymentType": "local",
+          "config": {
+            "type": "pglite",
+            "address": "file://appdb",
+            "username": "",
+            "password": "",
+            "database": "litdb"
+          }
+        },
+        "objectStorage": {
+          "type": "s3-compatible",
+          "deploymentType": "cloud",
+          "provider": "volcengine-tos",
+          "config": {
+            "endpoint": "https://tos-cn-beijing.volces.com",
+            "region": "cn-beijing",
+            "bucket": "lit",
+            "accessKeyId": "",
+            "secretAccessKey": ""
+          }
+        }
+      },
+      "externalServices": {
+        "volcFangzhouImage": {
+          "provider": "volcengine",
+          "service": "fangzhou-image-gen",
+          "enabled": true,
+          "config": {
+            "apiKey": "ad4d7631-c415-4d04-8302-eb293088ff47",
+            "baseUrl": "https://ark.cn-beijing.volces.com/api/v3/images/generations",
+            "model": "doubao-seedream-4-0-250828"
+          }
+        },
+        "volcFangzhouVideo": {
+          "provider": "volcengine",
+          "service": "fangzhou-video-gen",
+          "enabled": true,
+          "config": {
+            "apiKey": "ad4d7631-c415-4d04-8302-eb293088ff47",
+            "baseUrl": "https://ark.cn-beijing.volces.com/api/v3/contents/generations/tasks",
+            "model": "doubao-seedance-1-0-pro-fast-251015"
+          }
+        },
+        "volcTts": {
+          "provider": "volcengine",
+          "service": "tts",
+          "enabled": true,
+          "config": {
+            "appId": "",
+            "accessToken": "",
+            "secretKey": "",
+            "resourceId": "seed-tts-2.0",
+            "speaker": "zh_female_meilinvyou_saturn_bigtts",
+            "apiEndpoint": "https://openspeech.bytedance.com/api/v3/tts/unidirectional"
+          }
+        }
+      },
+      "applicationConfig": {
+        "jwt": {
+          "secret": "your-secret-jwt-key-change-this-in-production",
+          "userIdField": "username"
+        },
+        "rootUser": {
+          "password": "admin123456"
+        },
+        "nodeEnv": "development"
+      }
+    },
+    "communication": {
+      "name": "通信组件",
+      "enabled": true,
+      "host": "localhost",
+      "port": 3001,
+      "publicUrl": "http://localhost:3001",
+      "middlewareDependencies": {
+        "mainDb": {
+          "type": "postgresql",
+          "deploymentType": "local",
+          "config": {
+            "type": "pglite",
+            "address": "file://appdb",
+            "username": "",
+            "password": "",
+            "database": "litdb"
+          }
+        }
+      },
+      "externalServices": {},
+      "applicationConfig": {
+        "jwt": {
+          "secret": "your-secret-jwt-key-change-this-in-production",
+          "userIdField": "username"
+        }
+      }
+    },
+    "asyncTask": {
+      "name": "长任务容器组件",
+      "enabled": true,
+      "host": "localhost",
+      "port": 3002,
+      "publicUrl": "http://localhost:3002",
+      "middlewareDependencies": {
+        "mainDb": {
+          "type": "postgresql",
+          "deploymentType": "local",
+          "config": {
+            "type": "pglite",
+            "address": "file://appdb",
+            "username": "",
+            "password": "",
+            "database": "litdb"
+          }
+        },
+        "objectStorage": {
+          "type": "s3-compatible",
+          "deploymentType": "cloud",
+          "provider": "volcengine-tos",
+          "config": {
+            "endpoint": "https://tos-cn-beijing.volces.com",
+            "region": "cn-beijing",
+            "bucket": "lit",
+            "accessKeyId": "",
+            "secretAccessKey": ""
+          }
+        }
+      },
+      "externalServices": {
+        "volcFangzhouImage": {
+          "provider": "volcengine",
+          "service": "fangzhou-image-gen",
+          "enabled": true,
+          "config": {
+            "apiKey": "",
+            "baseUrl": "https://ark.cn-beijing.volces.com/api/v3/images/generations",
+            "model": "doubao-seedream-4-0-250828"
+          }
+        },
+        "volcFangzhouVideo": {
+          "provider": "volcengine",
+          "service": "fangzhou-video-gen",
+          "enabled": true,
+          "config": {
+            "apiKey": "",
+            "baseUrl": "https://ark.cn-beijing.volces.com/api/v3/contents/generations/tasks",
+            "model": "doubao-seedance-1-0-pro-fast-251015"
+          }
+        },
+        "volcTts": {
+          "provider": "volcengine",
+          "service": "tts",
+          "enabled": true,
+          "config": {
+            "appId": "",
+            "accessToken": "",
+            "secretKey": "",
+            "resourceId": "seed-tts-2.0",
+            "speaker": "zh_female_meilinvyou_saturn_bigtts",
+            "apiEndpoint": "https://openspeech.bytedance.com/api/v3/tts/unidirectional"
+          }
+        }
+      },
+      "applicationConfig": {}
+    }
+  },
+  "componentUrls": {
+    "main": "http://localhost:3000",
+    "communication": "http://localhost:3001",
+    "asyncTask": "http://localhost:3002"
+  }
+}
+

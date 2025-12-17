@@ -1,0 +1,16 @@
+{
+  "name": "@integrations/example_centrifugo",
+  "version": "0.1.0",
+  "description": "Centrifugo real-time messaging integration for Interaqt",
+  "type": "module",
+  "main": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "interaqt": "^0.8.10",
+    "zod": "^4.0.0"
+  }
+}
+

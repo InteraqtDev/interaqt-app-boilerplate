@@ -1,0 +1,14 @@
+{
+  "name": "@integrations/example_async",
+  "version": "1.0.0",
+  "description": "Volcengine Fangzhou Seedance video generation integration",
+  "type": "module",
+  "main": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "peerDependencies": {
+    "interaqt": "*",
+    "zod": "^4.0.0"
+  }
+}

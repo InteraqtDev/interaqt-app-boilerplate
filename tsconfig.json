@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "strict": false,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "backend/**/*",
+    "frontend/**/*",
+    "integrations/**/*",
+    "main-component/**/*",
+    "async-task-component/**/*",
+    "scripts/**/*",
+    "tests/**/*",
+    "config.ts"
+  ],
+  "exclude": [
+    "frontend/**/*"
+  ]
+} 

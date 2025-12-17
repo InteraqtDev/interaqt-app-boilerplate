@@ -1,0 +1,202 @@
+{
+  "version": "1.0",
+  "provider": "volcengine",
+  "environment": "prod",
+  "volcengine": {
+    "region": "cn-beijing",
+    "vkeClusterId": "<your-vke-cluster-id>",
+    "kubeconfigPath": "~/.kube/config-vke",
+    "accessKeyId": "<your-access-key-id>",
+    "secretAccessKey": "<your-secret-access-key>",
+    "vpcId": "<your-vpc-id>",
+    "subnetId": "<your-subnet-id>",
+    "imageRepository": "<your-image-repository>"
+  },
+  "components": {
+    "main": {
+      "deploymentType": "container",
+      "image": "<your-image-repository>/main:latest",
+      "replicas": 1,
+      "host": "0.0.0.0",
+      "port": 3000,
+      "publicAccess": true,
+      "middlewareDependencies": {
+        "mainDb": {
+          "deploymentType": "container",
+          "use": "postgresql",
+          "image": "<your-image-repository>/postgres:18",
+          "version": "18",
+          "replicas": 1,
+          "config": {
+            "type": "postgresql",
+            "username": "<your-db-username>",
+            "password": "<your-db-password>",
+            "database": "litdb"
+          }
+        },
+        "objectStorage": {
+          "deploymentType": "container",
+          "use": "minio",
+          "version": "RELEASE.2024-11-07T00-52-20Z",
+          "image": "<your-image-repository>/minio:RELEASE.2024-11-07T00-52-20Z",
+          "replicas": 1,
+          "endpoints": {
+            "main": { "publicAccess": true }
+          },
+          "config": {
+            "region": "cn-beijing",
+            "bucket": "lit",
+            "accessKeyId": "<your-minio-access-key>",
+            "secretAccessKey": "<your-minio-secret-key>"
+          }
+        },
+        "messageQueue": {
+          "deploymentType": "container",
+          "use": "kafka",
+          "version": "3.8.1",
+          "image": "<your-image-repository>/kafka:3.8.1",
+          "replicas": 1,
+          "config": {
+            "instanceId": "volcengine-kafka",
+            "username": "",
+            "password": "",
+            "ssl": false
+          }
+        }
+      },
+      "externalServices": {
+        "volcFangzhouImage": {
+          "config": {
+            "apiKey": "<your-api-key>",
+            "baseUrl": "https://ark.cn-beijing.volces.com/api/v3/images/generations",
+            "model": "doubao-seedream-4-0-250828"
+          }
+        },
+        "volcFangzhouVideo": {
+          "config": {
+            "apiKey": "<your-api-key>",
+            "baseUrl": "https://ark.cn-beijing.volces.com/api/v3/contents/generations/tasks",
+            "model": "doubao-seedance-1-0-pro-fast-251015"
+          }
+        },
+        "volcTts": {
+          "config": {
+            "appId": "<your-app-id>",
+            "accessToken": "<your-access-token>",
+            "secretKey": "<your-secret-key>",
+            "resourceId": "seed-tts-2.0",
+            "speaker": "zh_female_meilinvyou_saturn_bigtts",
+            "apiEndpoint": "https://openspeech.bytedance.com/api/v3/tts/unidirectional"
+          }
+        },
+        "nanobanana2Image": {
+          "config": {
+            "apiUrl": "https://api.example.com/nanobanana2",
+            "model": "nanobanana2",
+            "apiKey": "<your-api-key>"
+          }
+        },
+        "sora2Video": {
+          "config": {
+            "apiKey": "<your-api-key>",
+            "organization": "<your-organization>",
+            "project": "<your-project>"
+          }
+        }
+      },
+      "applicationConfig": {
+        "jwt": {
+          "secret": "<your-jwt-secret>",
+          "userIdField": "username"
+        },
+        "rootUser": {
+          "password": "<your-root-password>"
+        },
+        "nodeEnv": "production"
+      }
+    },
+    "communication": {
+      "deploymentType": "container",
+      "image": "<your-image-repository>/main:latest",
+      "replicas": 1,
+      "host": "0.0.0.0",
+      "port": 3001,
+      "skipApplication": true,
+      "middlewareDependencies": {
+        "redis": {
+          "deploymentType": "container",
+          "use": "redis",
+          "version": "7.0.15",
+          "image": "<your-image-repository>/redis:7.0.15",
+          "replicas": 1,
+          "config": {
+            "password": "<your-redis-password>"
+          }
+        },
+        "centrifugo": {
+          "deploymentType": "container",
+          "use": "centrifugo",
+          "version": "v6.5.1",
+          "image": "<your-image-repository>/centrifugo:v6.5.1",
+          "replicas": 1,
+          "endpoints": {
+            "main": { "publicAccess": true }
+          },
+          "dependencies": [
+            "components.communication.middlewareDependencies.redis"
+          ],
+          "config": {
+            "initImage": "<your-image-repository>/busybox:1.36",
+            "apiKey": "<your-centrifugo-api-key>",
+            "tokenHmacSecretKey": "<your-centrifugo-secret-key>",
+            "engine": "redis",
+            "redisAddress": "${ref:components.communication.middlewareDependencies.redis.endpoint}",
+            "redisPassword": "${ref:components.communication.middlewareDependencies.redis.config.password}",
+            "redisDb": "0",
+            "allowedOrigins": ["*"]
+          }
+        }
+      },
+      "externalServices": {},
+      "applicationConfig": {}
+    },
+    "asyncTask": {
+      "deploymentType": "container",
+      "image": "<your-image-repository>/main:latest",
+      "replicas": 1,
+      "startCommand": "npm run start:async-task",
+      "skipHealthCheck": true,
+      "middlewareDependencies": {
+        "temporalDb": {
+          "$ref": "components.main.middlewareDependencies.mainDb",
+          "config": {
+            "database": "temporal"
+          }
+        },
+        "temporal": {
+          "deploymentType": "container",
+          "use": "temporal",
+          "version": "1.24.2",
+          "image": "<your-image-repository>/temporal:1.29.0",
+          "replicas": 1,
+          "endpoints": {
+            "admin": { "publicAccess": true }
+          },
+          "dependencies": [
+            "components.asyncTask.middlewareDependencies.temporalDb"
+          ],
+          "config": {
+            "initImage": "<your-image-repository>/busybox:1.36",
+            "uiImage": "<your-image-repository>/temporal-ui:2.26.2",
+            "postgresSeeds": "${ref:components.asyncTask.middlewareDependencies.temporalDb.endpoint}",
+            "postgresPort": "5432",
+            "postgresUser": "${ref:components.asyncTask.middlewareDependencies.temporalDb.config.username}",
+            "postgresPwd": "${ref:components.asyncTask.middlewareDependencies.temporalDb.config.password}"
+          }
+        }
+      },
+      "externalServices": {},
+      "applicationConfig": {}
+    }
+  }
+}

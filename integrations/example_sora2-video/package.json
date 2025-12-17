@@ -1,0 +1,19 @@
+{
+  "name": "@integrations/example_sora2-video",
+  "version": "1.0.0",
+  "description": "Volcengine Fangzhou Video Generation integration",
+  "type": "module",
+  "main": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  },
+  "peerDependencies": {
+    "interaqt": "^0.8.10",
+    "zod": "^4.0.0"
+  }
+}
+
+

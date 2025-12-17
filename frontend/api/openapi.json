@@ -1,0 +1,955 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Interaqt API",
+    "version": "1.0.0",
+    "description": "Auto-generated API documentation from Zod schemas"
+  },
+  "paths": {
+    "/api/custom/auth/register": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthRegisterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Register new user",
+        "description": "Creates a new user account with username, email, and password",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthRegisterRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/auth/login": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "User login",
+        "description": "Authenticates user with username/email and password, returns JWT token",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthLoginRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/centrifugo/generateCentrifugoConnectionToken": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CentrifugoGenerateCentrifugoConnectionTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Generate Centrifugo connection token",
+        "description": "Generates a JWT token for connecting to Centrifugo WebSocket",
+        "tags": [
+          "Centrifugo"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CentrifugoGenerateCentrifugoConnectionTokenRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/centrifugo/generateChannelSubscriptionToken": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CentrifugoGenerateChannelSubscriptionTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Generate channel subscription token",
+        "description": "Generates a JWT token for subscribing to a private Centrifugo channel",
+        "tags": [
+          "Centrifugo"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CentrifugoGenerateChannelSubscriptionTokenRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/fangzhouVideoGeneration/fetchPendingTasks": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "FangzhouVideoGeneration/fetchPendingTasks API"
+      }
+    },
+    "/api/custom/fangzhouVideoGeneration/queryFangzhouVideoStatus": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FangzhouVideoGenerationQueryFangzhouVideoStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Query Fangzhou video generation status",
+        "description": "Triggers immediate status check by signaling the Temporal workflow, and returns current known status.",
+        "tags": [
+          "VideoGeneration"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FangzhouVideoGenerationQueryFangzhouVideoStatusRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/fangzhouVideoGeneration/reportFangzhouVideoResult": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FangzhouVideoGenerationReportFangzhouVideoResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Report Fangzhou video generation result",
+        "description": "Callback API for Temporal workflow to report task status. Creates integration event for queued/processing/completed/failed status.",
+        "tags": [
+          "VideoGeneration"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FangzhouVideoGenerationReportFangzhouVideoResultRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/nanobanana2ImageGeneration/fetchPendingTasks": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Nanobanana2ImageGeneration/fetchPendingTasks API"
+      }
+    },
+    "/api/custom/nanobanana2ImageGeneration/queryNanobanana2Status": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nanobanana2ImageGenerationQueryNanobanana2StatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Query Nanobanana2 image generation status",
+        "description": "Returns the current known status of the image generation task from APICall entity.",
+        "tags": [
+          "ImageGeneration"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Nanobanana2ImageGenerationQueryNanobanana2StatusRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/nanobanana2ImageGeneration/reportNanobanana2Result": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nanobanana2ImageGenerationReportNanobanana2ResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Report Nanobanana2 image generation result",
+        "description": "Callback API for Temporal workflow to report task status. Creates integration event for queued/processing/completed/failed status.",
+        "tags": [
+          "ImageGeneration"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Nanobanana2ImageGenerationReportNanobanana2ResultRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/objectStorage/getUploadUrl": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectStorageGetUploadUrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get pre-signed upload URL",
+        "description": "Generates a pre-signed URL for direct client-to-storage file uploads",
+        "tags": [
+          "Storage"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjectStorageGetUploadUrlRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/volcDoubaoASR/fetchPendingTasks": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "VolcDoubaoASR/fetchPendingTasks API"
+      }
+    },
+    "/api/custom/volcDoubaoASR/queryVolcDoubaoASRStatus": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VolcDoubaoASRQueryVolcDoubaoASRStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Query Volcano Doubao ASR status",
+        "description": "Triggers immediate status check by signaling the Temporal workflow, and returns current known status.",
+        "tags": [
+          "ASR"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VolcDoubaoASRQueryVolcDoubaoASRStatusRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/custom/volcDoubaoASR/reportVolcDoubaoASRResult": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VolcDoubaoASRReportVolcDoubaoASRResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Report Volcano Doubao ASR result",
+        "description": "Callback API for Temporal workflow to report task status. Creates integration event for queued/processing/completed/failed status.",
+        "tags": [
+          "ASR"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VolcDoubaoASRReportVolcDoubaoASRResultRequest"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuthRegisterRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "minLength": 1
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 6
+          }
+        },
+        "required": [
+          "username",
+          "email",
+          "password"
+        ],
+        "additionalProperties": false
+      },
+      "AuthRegisterResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "success",
+          "message",
+          "userId"
+        ],
+        "additionalProperties": false
+      },
+      "AuthLoginRequest": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "minLength": 1
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "identifier",
+          "password"
+        ],
+        "additionalProperties": false
+      },
+      "AuthLoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "token",
+          "user"
+        ],
+        "additionalProperties": false
+      },
+      "CentrifugoGenerateCentrifugoConnectionTokenRequest": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "CentrifugoGenerateCentrifugoConnectionTokenResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ],
+        "additionalProperties": false
+      },
+      "CentrifugoGenerateChannelSubscriptionTokenRequest": {
+        "type": "object",
+        "properties": {
+          "chatRoomId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "chatRoomId"
+        ],
+        "additionalProperties": false
+      },
+      "CentrifugoGenerateChannelSubscriptionTokenResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "channel"
+        ],
+        "additionalProperties": false
+      },
+      "FangzhouVideoGenerationQueryFangzhouVideoStatusRequest": {
+        "type": "object",
+        "properties": {
+          "apiCallId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "apiCallId"
+        ],
+        "additionalProperties": false
+      },
+      "FangzhouVideoGenerationQueryFangzhouVideoStatusResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "FangzhouVideoGenerationReportFangzhouVideoResultRequest": {
+        "type": "object",
+        "properties": {
+          "apiCallId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "processing",
+              "completed",
+              "failed"
+            ]
+          },
+          "taskId": {
+            "type": "string"
+          },
+          "videoUrl": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "apiCallId",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "FangzhouVideoGenerationReportFangzhouVideoResultResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "Nanobanana2ImageGenerationQueryNanobanana2StatusRequest": {
+        "type": "object",
+        "properties": {
+          "apiCallId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "apiCallId"
+        ],
+        "additionalProperties": false
+      },
+      "Nanobanana2ImageGenerationQueryNanobanana2StatusResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "Nanobanana2ImageGenerationReportNanobanana2ResultRequest": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "processing",
+              "completed",
+              "failed"
+            ]
+          },
+          "apiCallId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "imageUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "apiCallId"
+        ],
+        "additionalProperties": false
+      },
+      "Nanobanana2ImageGenerationReportNanobanana2ResultResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "ObjectStorageGetUploadUrlRequest": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "expiresIn": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        },
+        "required": [
+          "fileName"
+        ],
+        "additionalProperties": false
+      },
+      "ObjectStorageGetUploadUrlResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "uploadUrl": {
+            "type": "string"
+          },
+          "objectKey": {
+            "type": "string"
+          },
+          "downloadUrl": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "success",
+          "uploadUrl",
+          "objectKey",
+          "downloadUrl",
+          "expiresAt"
+        ],
+        "additionalProperties": false
+      },
+      "VolcDoubaoASRQueryVolcDoubaoASRStatusRequest": {
+        "type": "object",
+        "properties": {
+          "apiCallId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "apiCallId"
+        ],
+        "additionalProperties": false
+      },
+      "VolcDoubaoASRQueryVolcDoubaoASRStatusResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "VolcDoubaoASRReportVolcDoubaoASRResultRequest": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "processing",
+              "completed",
+              "failed"
+            ]
+          },
+          "apiCallId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "taskId": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "apiCallId"
+        ],
+        "additionalProperties": false
+      },
+      "VolcDoubaoASRReportVolcDoubaoASRResultResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

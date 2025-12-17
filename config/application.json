@@ -1,0 +1,162 @@
+{
+  "version": "1.0.0",
+  "components": {
+    "main": {
+      "name": "业务逻辑组件",
+      "port": 3000,
+      "middlewareDependencies": {
+        "mainDb": {
+          "type": "postgresql",
+          "version": "18.1",
+          "requiredFields": [
+            "username",
+            "password",
+            "database"
+          ]
+        },
+        "objectStorage": {
+          "type": "minio",
+          "version": "RELEASE.2024-11-07T00-52-20Z",
+          "endpoints": {
+            "main": { "publicAccess": true }
+          },
+          "requiredFields": [
+            "region",
+            "bucket",
+            "accessKeyId",
+            "secretAccessKey"
+          ]
+        }
+      },
+      "externalServices": {
+        "volcFangzhouImage": {
+          "provider": "volcengine",
+          "service": "fangzhou-image-gen",
+          "requiredFields": [
+            "apiKey",
+            "baseUrl",
+            "model"
+          ]
+        },
+        "volcFangzhouVideo": {
+          "provider": "volcengine",
+          "service": "fangzhou-video-gen",
+          "requiredFields": [
+            "apiKey",
+            "baseUrl",
+            "model"
+          ]
+        },
+        "volcFangzhouAuc": {
+          "provider": "volcengine",
+          "service": "fangzhou-auc",
+          "requiredFields": [
+            "appId",
+            "accessToken",
+            "secretKey",
+            "baseUrl",
+            "model"
+          ]
+        },
+        "volcTts": {
+          "provider": "volcengine",
+          "service": "tts",
+          "requiredFields": [
+            "appId",
+            "accessToken",
+            "secretKey",
+            "resourceId",
+            "speaker",
+            "apiEndpoint"
+          ]
+        },
+        "nanobanana2Image": {
+          "provider": "litellm",
+          "service": "nanobanana2-image",
+          "requiredFields": [
+            "apiUrl",
+            "model",
+            "apiKey"
+          ]
+        },
+        "sora2Video": {
+          "provider": "openai",
+          "service": "sora2-video",
+          "requiredFields": [
+            "apiKey",
+            "organization",
+            "project"
+          ]
+        }
+      },
+      "applicationConfig": {
+        "jwt": {
+          "requiredFields": [
+            "secret",
+            "userIdField"
+          ]
+        },
+        "rootUser": {
+          "requiredFields": [
+            "password"
+          ]
+        }
+      }
+    },
+    "communication": {
+      "name": "通信组件",
+      "port": 3001,
+      "middlewareDependencies": {
+        "centrifugo": {
+          "type": "centrifugo",
+          "version": "6.5.1",
+          "endpoints": {
+            "main": { "publicAccess": true }
+          },
+          "requiredFields": [
+            "apiKey",
+            "tokenHmacSecretKey"
+          ],
+          "config": {
+            "namespaces": [
+              {
+                "name": "chat-room",
+                "publish": true,
+                "subscribe": true,
+                "presence": true,
+                "history_size": 100,
+                "history_lifetime": 300,
+                "history_recover": true
+              }
+            ]
+          }
+        }
+      },
+      "externalServices": {},
+      "applicationConfig": {}
+    },
+    "asyncTask": {
+      "name": "长任务容器组件",
+      "port": 3002,
+      "middlewareDependencies": {
+        "temporalDb": {
+          "type": "postgresql",
+          "version": ">=14.0.0",
+          "description": "Temporal 专用 PostgreSQL 数据库",
+          "requiredFields": ["username", "password", "database"]
+        },
+        "temporal": {
+          "type": "temporal",
+          "version": ">=1.24.0",
+          "endpoints": {
+            "admin": { "publicAccess": true }
+          },
+          "description": "Temporal 持久化执行平台，用于异步任务编排和工作流管理",
+          "requiredFields": []
+        }
+      },
+      "externalServices": {},
+      "applicationConfig": {}
+    }
+  }
+}

@@ -1,0 +1,168 @@
+/**
+ * Nanobanana2 Image Generation External API Integration Tests
+ *
+ * Purpose: Verify external system APIs work with real credentials
+ * IMPORTANT: These tests use REAL API calls
+ */
+
+import { describe, it, expect } from 'vitest'
+import appConfig from '@/app.config.json'
+import {
+  callImageGenerationApi,
+  type ImageGenerationParams,
+  type Nanobanana2Config
+} from '@/integrations/nanobanana2ImageGeneration/externalApi'
+
+type Nanobanana2ApiConfig = Nanobanana2Config
+
+// Small 1x1 pixel red PNG as base64 for testing
+const TEST_IMAGE_BASE64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg=='
+
+describe('Nanobanana2 Image Generation External API Tests', () => {
+  const config = (appConfig as any).components.main.externalServices.nanobanana2Image.config as Nanobanana2ApiConfig
+
+  describe('Configuration', () => {
+    it('should have required configuration', () => {
+      expect(config).toBeDefined()
+      expect(config.apiKey).toBeDefined()
+      expect(config.apiKey).not.toBe('')
+      expect(config.apiUrl).toBeDefined()
+      expect(config.apiUrl).not.toBe('')
+      expect(config.model).toBeDefined()
+      expect(config.model).not.toBe('')
+    })
+
+    it('should have valid model name', () => {
+      expect(config.model).toMatch(/vertex_ai\/gemini/)
+    })
+
+    it('should have valid API URL', () => {
+      expect(config.apiUrl).toMatch(/^https?:\/\//)
+    })
+  })
+
+  describe('Image Generation API', () => {
+    it('should generate images successfully with valid parameters', async () => {
+      const params: ImageGenerationParams = {
+        model: config.model,
+        prompt: 'A beautiful sunset over mountains',
+        image: TEST_IMAGE_BASE64
+      }
+
+      const response = await callImageGenerationApi(params, config)
+
+      // Verify response structure
+      expect(response).toBeDefined()
+      expect(response.model).toBeDefined()
+      expect(response.created).toBeGreaterThan(0)
+      expect(response.data).toBeInstanceOf(Array)
+      expect(response.data.length).toBeGreaterThan(0)
+      expect(response.usage).toBeDefined()
+      expect(response.usage.generated_images).toBeGreaterThan(0)
+
+      // Verify image data
+      const firstImage = response.data[0]
+      expect(firstImage.url).toBeDefined()
+      expect(firstImage.url.length).toBeGreaterThan(0)
+      expect(firstImage.size).toBeDefined()
+      expect(firstImage.size).toMatch(/\d+x\d+/)
+
+      console.log('[TEST] Generated images:', response.data.length)
+      console.log('[TEST] First image URL length:', firstImage.url.length)
+      console.log('[TEST] First image size:', firstImage.size)
+    }, 60000) // 60 second timeout for API call
+
+    it('should handle invalid API key', async () => {
+      const invalidConfig: Nanobanana2ApiConfig = {
+        ...config,
+        apiKey: 'invalid-api-key'
+      }
+
+      const params: ImageGenerationParams = {
+        model: config.model,
+        prompt: 'Test prompt',
+        image: TEST_IMAGE_BASE64
+      }
+
+      await expect(callImageGenerationApi(params, invalidConfig)).rejects.toThrow()
+    }, 30000)
+
+    it.skip('should handle empty prompt gracefully', async () => {
+      // Skipped: API behavior with empty prompt may vary
+      const params: ImageGenerationParams = {
+        model: config.model,
+        prompt: '',
+        image: TEST_IMAGE_BASE64
+      }
+
+      // API should either accept empty prompt or throw error
+      await expect(
+        callImageGenerationApi(params, config)
+      ).rejects.toThrow()
+    }, 30000)
+
+    it.skip('should handle multiple reference images', async () => {
+      // Skipped: Requires more complex setup and longer timeout
+      const params: ImageGenerationParams = {
+        model: config.model,
+        prompt: 'Combine these images',
+        image: [TEST_IMAGE_BASE64, TEST_IMAGE_BASE64]
+      }
+
+      const response = await callImageGenerationApi(params, config)
+
+      expect(response).toBeDefined()
+      expect(response.data).toBeInstanceOf(Array)
+      expect(response.data.length).toBeGreaterThan(0)
+
+      console.log('[TEST] Generated images from multiple references:', response.data.length)
+    }, 90000)
+  })
+
+  describe('Error Handling', () => {
+    it('should throw error for missing API key', async () => {
+      const invalidConfig: Nanobanana2ApiConfig = {
+        ...config,
+        apiKey: ''
+      }
+
+      const params: ImageGenerationParams = {
+        model: config.model,
+        prompt: 'Test',
+        image: TEST_IMAGE_BASE64
+      }
+
+      await expect(callImageGenerationApi(params, invalidConfig)).rejects.toThrow('API key is required')
+    })
+
+    it('should throw error for missing apiUrl', async () => {
+      const invalidConfig: Nanobanana2ApiConfig = {
+        ...config,
+        apiUrl: ''
+      }
+
+      const params: ImageGenerationParams = {
+        model: config.model,
+        prompt: 'Test',
+        image: TEST_IMAGE_BASE64
+      }
+
+      await expect(callImageGenerationApi(params, invalidConfig)).rejects.toThrow('required in config')
+    })
+
+    it('should throw error for missing model', async () => {
+      const invalidConfig: Nanobanana2ApiConfig = {
+        ...config,
+        model: ''
+      }
+
+      const params: ImageGenerationParams = {
+        model: '',
+        prompt: 'Test',
+        image: TEST_IMAGE_BASE64
+      }
+
+      await expect(callImageGenerationApi(params, invalidConfig)).rejects.toThrow('required in config')
+    })
+  })
+})

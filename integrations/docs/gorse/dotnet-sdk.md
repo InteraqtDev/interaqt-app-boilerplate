@@ -1,0 +1,66 @@
+---
+icon: dot-net
+---
+# .NET SDK
+
+::: warning
+
+The .NET SDK is under development, and APIs might be changed in later versions. Pull requests are welcomed: https://github.com/gorse-io/Gorse.NET
+
+:::
+
+[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Gorse.NET)](https://www.nuget.org/packages/Gorse.NET/)[![Nuget](https://img.shields.io/nuget/dt/Gorse.NET)](https://www.nuget.org/packages/Gorse.NET/)
+
+## Install
+
+- Install via .NET CLI:
+
+```bash
+dotnet add package Gorse.NET
+```
+
+- Install via NuGet Package Manager:
+
+```bash
+NuGet\Install-Package Gorse.NET
+```
+
+## Usage
+
+```cs
+using Gorse.NET;
+
+var client = new Gorse("http://127.0.0.1:8087", "api_key");
+
+// Insert a user
+client.InsertUser(new User
+{
+    UserId = "bob",
+    Labels = new { company = "gorse", location = "hangzhou, china" },
+    Comment = "Bob is a software engineer."
+});
+
+// Insert an item
+client.InsertItem(new Item
+{
+    ItemId = "gorse-io:gorse",
+    IsHidden = false,
+    Labels = new { topics = new[] { "recommendation", "machine-learning" } },
+    Categories = new[] { "go" },
+    Timestamp = "2022-02-22",
+    Comment = "Gorse is an open-source recommender system."
+}
+
+// Insert feedback
+client.InsertFeedback(new Feedback[]
+{
+    new Feedback{FeedbackType="star", UserId="bob", ItemId="ollama:ollama", Value=1.0, Timestamp="2022-02-24"},
+    new Feedback{FeedbackType="star", UserId="bob", ItemId="huggingface:transformers", Value=1.0, Timestamp="2022-02-25"},
+    new Feedback{FeedbackType="star", UserId="bob", ItemId="rasbt:llms-from-scratch", Value=1.0, Timestamp="2022-02-26"},
+    new Feedback{FeedbackType="star", UserId="bob", ItemId="vllm-project:vllm", Value=1.0, Timestamp="2022-02-27"},
+    new Feedback{FeedbackType="star", UserId="bob", ItemId="hiyouga:llama-factory", Value=1.0, Timestamp="2022-02-28"}
+});
+
+// Get recommendations
+client.GetRecommend("bob");
+```

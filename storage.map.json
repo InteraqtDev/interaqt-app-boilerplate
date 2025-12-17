@@ -1,0 +1,3120 @@
+{
+  "links": {
+    "User_channels_creator_Channel": {
+      "table": "Channel",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "User",
+      "sourceProperty": "channels",
+      "targetRecord": "Channel",
+      "targetProperty": "creator",
+      "recordName": "User_channels_creator_Channel",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "User_channels_creator_Channel",
+      "mergedTo": "target"
+    },
+    "User_channels_creator_Channel_source": {
+      "attributes": {},
+      "sourceRecord": "User_channels_creator_Channel",
+      "sourceProperty": "source",
+      "targetRecord": "User",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "User_channels_creator_Channel_target": {
+      "attributes": {},
+      "sourceRecord": "User_channels_creator_Channel",
+      "sourceProperty": "target",
+      "targetRecord": "Channel",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "Channel_mediaContents_channel_MediaContent": {
+      "table": "MediaContent",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "Channel",
+      "sourceProperty": "mediaContents",
+      "targetRecord": "MediaContent",
+      "targetProperty": "channel",
+      "recordName": "Channel_mediaContents_channel_MediaContent",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "Channel_mediaContents_channel_MediaContent",
+      "mergedTo": "target"
+    },
+    "Channel_mediaContents_channel_MediaContent_source": {
+      "attributes": {},
+      "sourceRecord": "Channel_mediaContents_channel_MediaContent",
+      "sourceProperty": "source",
+      "targetRecord": "Channel",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "Channel_mediaContents_channel_MediaContent_target": {
+      "attributes": {},
+      "sourceRecord": "Channel_mediaContents_channel_MediaContent",
+      "sourceProperty": "target",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "User_mediaContents_uploader_MediaContent": {
+      "table": "MediaContent",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "User",
+      "sourceProperty": "mediaContents",
+      "targetRecord": "MediaContent",
+      "targetProperty": "uploader",
+      "recordName": "User_mediaContents_uploader_MediaContent",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "User_mediaContents_uploader_MediaContent",
+      "mergedTo": "target"
+    },
+    "User_mediaContents_uploader_MediaContent_source": {
+      "attributes": {},
+      "sourceRecord": "User_mediaContents_uploader_MediaContent",
+      "sourceProperty": "source",
+      "targetRecord": "User",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "User_mediaContents_uploader_MediaContent_target": {
+      "attributes": {},
+      "sourceRecord": "User_mediaContents_uploader_MediaContent",
+      "sourceProperty": "target",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "Channel_feedItems_feedChannels_MediaContent": {
+      "table": "Channel_feedItems_feedChannels_MediaContent",
+      "relType": [
+        "n",
+        "n"
+      ],
+      "sourceRecord": "Channel",
+      "sourceProperty": "feedItems",
+      "targetRecord": "MediaContent",
+      "targetProperty": "feedChannels",
+      "recordName": "Channel_feedItems_feedChannels_MediaContent",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "Channel_feedItems_feedChannels_MediaContent"
+    },
+    "Channel_feedItems_feedChannels_MediaContent_source": {
+      "attributes": {},
+      "sourceRecord": "Channel_feedItems_feedChannels_MediaContent",
+      "sourceProperty": "source",
+      "targetRecord": "Channel",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "Channel_feedItems_feedChannels_MediaContent_target": {
+      "attributes": {},
+      "sourceRecord": "Channel_feedItems_feedChannels_MediaContent",
+      "sourceProperty": "target",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "MediaContent_sourceImage_derivedContents_MediaContent": {
+      "table": "MediaContent",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "sourceRecord": "MediaContent",
+      "sourceProperty": "sourceImage",
+      "targetRecord": "MediaContent",
+      "targetProperty": "derivedContents",
+      "recordName": "MediaContent_sourceImage_derivedContents_MediaContent",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "MediaContent_sourceImage_derivedContents_MediaContent",
+      "mergedTo": "source"
+    },
+    "MediaContent_sourceImage_derivedContents_MediaContent_source": {
+      "attributes": {},
+      "sourceRecord": "MediaContent_sourceImage_derivedContents_MediaContent",
+      "sourceProperty": "source",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "MediaContent_sourceImage_derivedContents_MediaContent_target": {
+      "attributes": {},
+      "sourceRecord": "MediaContent_sourceImage_derivedContents_MediaContent",
+      "sourceProperty": "target",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "Channel_nanobanana2Calls_channel_Nanobanana2Call": {
+      "table": "Nanobanana2Call",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "Channel",
+      "sourceProperty": "nanobanana2Calls",
+      "targetRecord": "Nanobanana2Call",
+      "targetProperty": "channel",
+      "recordName": "Channel_nanobanana2Calls_channel_Nanobanana2Call",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "Channel_nanobanana2Calls_channel_Nanobanana2Call",
+      "mergedTo": "target"
+    },
+    "Channel_nanobanana2Calls_channel_Nanobanana2Call_source": {
+      "attributes": {},
+      "sourceRecord": "Channel_nanobanana2Calls_channel_Nanobanana2Call",
+      "sourceProperty": "source",
+      "targetRecord": "Channel",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "Channel_nanobanana2Calls_channel_Nanobanana2Call_target": {
+      "attributes": {},
+      "sourceRecord": "Channel_nanobanana2Calls_channel_Nanobanana2Call",
+      "sourceProperty": "target",
+      "targetRecord": "Nanobanana2Call",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "Channel_fangzhouCalls_channel_FangzhouCall": {
+      "table": "FangzhouCall",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "Channel",
+      "sourceProperty": "fangzhouCalls",
+      "targetRecord": "FangzhouCall",
+      "targetProperty": "channel",
+      "recordName": "Channel_fangzhouCalls_channel_FangzhouCall",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "Channel_fangzhouCalls_channel_FangzhouCall",
+      "mergedTo": "target"
+    },
+    "Channel_fangzhouCalls_channel_FangzhouCall_source": {
+      "attributes": {},
+      "sourceRecord": "Channel_fangzhouCalls_channel_FangzhouCall",
+      "sourceProperty": "source",
+      "targetRecord": "Channel",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "Channel_fangzhouCalls_channel_FangzhouCall_target": {
+      "attributes": {},
+      "sourceRecord": "Channel_fangzhouCalls_channel_FangzhouCall",
+      "sourceProperty": "target",
+      "targetRecord": "FangzhouCall",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call": {
+      "table": "MediaContent",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "sourceRecord": "MediaContent",
+      "sourceProperty": "nanobanana2Call",
+      "targetRecord": "Nanobanana2Call",
+      "targetProperty": "generatedMediaContents",
+      "recordName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call",
+      "mergedTo": "source"
+    },
+    "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call_source": {
+      "attributes": {},
+      "sourceRecord": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call",
+      "sourceProperty": "source",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call_target": {
+      "attributes": {},
+      "sourceRecord": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call",
+      "sourceProperty": "target",
+      "targetRecord": "Nanobanana2Call",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall": {
+      "table": "MediaContent",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "sourceRecord": "MediaContent",
+      "sourceProperty": "fangzhouCall",
+      "targetRecord": "FangzhouCall",
+      "targetProperty": "generatedMediaContent",
+      "recordName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall",
+      "mergedTo": "source"
+    },
+    "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall_source": {
+      "attributes": {},
+      "sourceRecord": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall",
+      "sourceProperty": "source",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall_target": {
+      "attributes": {},
+      "sourceRecord": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall",
+      "sourceProperty": "target",
+      "targetRecord": "FangzhouCall",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "Channel_initialReferenceImage_channelsAsReference_MediaContent": {
+      "table": "Channel",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "sourceRecord": "Channel",
+      "sourceProperty": "initialReferenceImage",
+      "targetRecord": "MediaContent",
+      "targetProperty": "channelsAsReference",
+      "recordName": "Channel_initialReferenceImage_channelsAsReference_MediaContent",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "Channel_initialReferenceImage_channelsAsReference_MediaContent",
+      "mergedTo": "source"
+    },
+    "Channel_initialReferenceImage_channelsAsReference_MediaContent_source": {
+      "attributes": {},
+      "sourceRecord": "Channel_initialReferenceImage_channelsAsReference_MediaContent",
+      "sourceProperty": "source",
+      "targetRecord": "Channel",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "Channel_initialReferenceImage_channelsAsReference_MediaContent_target": {
+      "attributes": {},
+      "sourceRecord": "Channel_initialReferenceImage_channelsAsReference_MediaContent",
+      "sourceProperty": "target",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "Channel_chatRoom_channel_ChatRoom": {
+      "table": "Channel",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "sourceRecord": "Channel",
+      "sourceProperty": "chatRoom",
+      "targetRecord": "ChatRoom",
+      "targetProperty": "channel",
+      "recordName": "Channel_chatRoom_channel_ChatRoom",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "Channel_chatRoom_channel_ChatRoom",
+      "mergedTo": "source"
+    },
+    "Channel_chatRoom_channel_ChatRoom_source": {
+      "attributes": {},
+      "sourceRecord": "Channel_chatRoom_channel_ChatRoom",
+      "sourceProperty": "source",
+      "targetRecord": "Channel",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "Channel_chatRoom_channel_ChatRoom_target": {
+      "attributes": {},
+      "sourceRecord": "Channel_chatRoom_channel_ChatRoom",
+      "sourceProperty": "target",
+      "targetRecord": "ChatRoom",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "User_joinedChatRooms_members_ChatRoom": {
+      "table": "User_joinedChatRooms_members_ChatRoom",
+      "relType": [
+        "n",
+        "n"
+      ],
+      "sourceRecord": "User",
+      "sourceProperty": "joinedChatRooms",
+      "targetRecord": "ChatRoom",
+      "targetProperty": "members",
+      "recordName": "User_joinedChatRooms_members_ChatRoom",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "User_joinedChatRooms_members_ChatRoom"
+    },
+    "User_joinedChatRooms_members_ChatRoom_source": {
+      "attributes": {},
+      "sourceRecord": "User_joinedChatRooms_members_ChatRoom",
+      "sourceProperty": "source",
+      "targetRecord": "User",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "User_joinedChatRooms_members_ChatRoom_target": {
+      "attributes": {},
+      "sourceRecord": "User_joinedChatRooms_members_ChatRoom",
+      "sourceProperty": "target",
+      "targetRecord": "ChatRoom",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "User_chatMessages_sender_ChatMessage": {
+      "table": "ChatMessage",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "User",
+      "sourceProperty": "chatMessages",
+      "targetRecord": "ChatMessage",
+      "targetProperty": "sender",
+      "recordName": "User_chatMessages_sender_ChatMessage",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "User_chatMessages_sender_ChatMessage",
+      "mergedTo": "target"
+    },
+    "User_chatMessages_sender_ChatMessage_source": {
+      "attributes": {},
+      "sourceRecord": "User_chatMessages_sender_ChatMessage",
+      "sourceProperty": "source",
+      "targetRecord": "User",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "User_chatMessages_sender_ChatMessage_target": {
+      "attributes": {},
+      "sourceRecord": "User_chatMessages_sender_ChatMessage",
+      "sourceProperty": "target",
+      "targetRecord": "ChatMessage",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "ChatRoom_messages_chatRoom_ChatMessage": {
+      "table": "ChatMessage",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "ChatRoom",
+      "sourceProperty": "messages",
+      "targetRecord": "ChatMessage",
+      "targetProperty": "chatRoom",
+      "recordName": "ChatRoom_messages_chatRoom_ChatMessage",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "ChatRoom_messages_chatRoom_ChatMessage",
+      "mergedTo": "target"
+    },
+    "ChatRoom_messages_chatRoom_ChatMessage_source": {
+      "attributes": {},
+      "sourceRecord": "ChatRoom_messages_chatRoom_ChatMessage",
+      "sourceProperty": "source",
+      "targetRecord": "ChatRoom",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "ChatRoom_messages_chatRoom_ChatMessage_target": {
+      "attributes": {},
+      "sourceRecord": "ChatRoom_messages_chatRoom_ChatMessage",
+      "sourceProperty": "target",
+      "targetRecord": "ChatMessage",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "MediaContent_comments_mediaContent_Comment": {
+      "table": "Comment",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "MediaContent",
+      "sourceProperty": "comments",
+      "targetRecord": "Comment",
+      "targetProperty": "mediaContent",
+      "recordName": "MediaContent_comments_mediaContent_Comment",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "MediaContent_comments_mediaContent_Comment",
+      "mergedTo": "target"
+    },
+    "MediaContent_comments_mediaContent_Comment_source": {
+      "attributes": {},
+      "sourceRecord": "MediaContent_comments_mediaContent_Comment",
+      "sourceProperty": "source",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "MediaContent_comments_mediaContent_Comment_target": {
+      "attributes": {},
+      "sourceRecord": "MediaContent_comments_mediaContent_Comment",
+      "sourceProperty": "target",
+      "targetRecord": "Comment",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "User_comments_author_Comment": {
+      "table": "Comment",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "User",
+      "sourceProperty": "comments",
+      "targetRecord": "Comment",
+      "targetProperty": "author",
+      "recordName": "User_comments_author_Comment",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "User_comments_author_Comment",
+      "mergedTo": "target"
+    },
+    "User_comments_author_Comment_source": {
+      "attributes": {},
+      "sourceRecord": "User_comments_author_Comment",
+      "sourceProperty": "source",
+      "targetRecord": "User",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "User_comments_author_Comment_target": {
+      "attributes": {},
+      "sourceRecord": "User_comments_author_Comment",
+      "sourceProperty": "target",
+      "targetRecord": "Comment",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall": {
+      "table": "VolcDoubaoASRCall",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "Comment",
+      "sourceProperty": "volcDoubaoASRCalls",
+      "targetRecord": "VolcDoubaoASRCall",
+      "targetProperty": "comment",
+      "recordName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall",
+      "mergedTo": "target"
+    },
+    "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall_source": {
+      "attributes": {},
+      "sourceRecord": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall",
+      "sourceProperty": "source",
+      "targetRecord": "Comment",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall_target": {
+      "attributes": {},
+      "sourceRecord": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall",
+      "sourceProperty": "target",
+      "targetRecord": "VolcDoubaoASRCall",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    },
+    "UserMediaContentLikeRelation": {
+      "table": "UserMediaContentLikeRelation",
+      "relType": [
+        "n",
+        "n"
+      ],
+      "sourceRecord": "User",
+      "sourceProperty": "likedMediaContents",
+      "targetRecord": "MediaContent",
+      "targetProperty": "likedByUsers",
+      "recordName": "UserMediaContentLikeRelation",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "UserMediaContentLikeRelation"
+    },
+    "UserMediaContentLikeRelation_source": {
+      "attributes": {},
+      "sourceRecord": "UserMediaContentLikeRelation",
+      "sourceProperty": "source",
+      "targetRecord": "User",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "UserMediaContentLikeRelation_target": {
+      "attributes": {},
+      "sourceRecord": "UserMediaContentLikeRelation",
+      "sourceProperty": "target",
+      "targetRecord": "MediaContent",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "activityInteraction": {
+      "table": "_Interaction_",
+      "relType": [
+        "1",
+        "n"
+      ],
+      "sourceRecord": "_Activity_",
+      "sourceProperty": "interaction",
+      "targetRecord": "_Interaction_",
+      "targetProperty": "activity",
+      "recordName": "activityInteraction",
+      "isTargetReliance": false,
+      "resolvedBaseRecordName": "activityInteraction",
+      "mergedTo": "target"
+    },
+    "activityInteraction_source": {
+      "attributes": {},
+      "sourceRecord": "activityInteraction",
+      "sourceProperty": "source",
+      "targetRecord": "_Activity_",
+      "relType": [
+        "n",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "source"
+    },
+    "activityInteraction_target": {
+      "attributes": {},
+      "sourceRecord": "activityInteraction",
+      "sourceProperty": "target",
+      "targetRecord": "_Interaction_",
+      "relType": [
+        "1",
+        "1"
+      ],
+      "isSourceRelation": true,
+      "mergedTo": "combined"
+    }
+  },
+  "records": {
+    "User": {
+      "table": "User",
+      "attributes": {
+        "username": {
+          "name": "username",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "use_use_1"
+        },
+        "email": {
+          "name": "email",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "use_ema_2"
+        },
+        "passwordHash": {
+          "name": "passwordHash",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "use_pas_3"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "use_cre_4"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "use_id_5"
+        },
+        "channels": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "Channel",
+          "linkName": "User_channels_creator_Channel",
+          "attributeName": "channels",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "mediaContents": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "User_mediaContents_uploader_MediaContent",
+          "attributeName": "mediaContents",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "joinedChatRooms": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "n"
+          ],
+          "recordName": "ChatRoom",
+          "linkName": "User_joinedChatRooms_members_ChatRoom",
+          "attributeName": "joinedChatRooms",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "chatMessages": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "ChatMessage",
+          "linkName": "User_chatMessages_sender_ChatMessage",
+          "attributeName": "chatMessages",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "comments": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "Comment",
+          "linkName": "User_comments_author_Comment",
+          "attributeName": "comments",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "likedMediaContents": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "n"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "UserMediaContentLikeRelation",
+          "attributeName": "likedMediaContents",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "User",
+      "resolvedBaseRecordName": "User"
+    },
+    "Channel": {
+      "table": "Channel",
+      "attributes": {
+        "name": {
+          "name": "name",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "cha_nam_6"
+        },
+        "initialPrompt": {
+          "name": "initialPrompt",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "cha_ini_7"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "cha_cre_8"
+        },
+        "_Channel_bound_sourceRecordId": {
+          "name": "_Channel_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "cha__9"
+        },
+        "_Channel_bound_transformIndex": {
+          "name": "_Channel_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "cha__10"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_id_11"
+        },
+        "creator": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "User_channels_creator_Channel",
+          "attributeName": "creator",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "mediaContents": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "Channel_mediaContents_channel_MediaContent",
+          "attributeName": "mediaContents",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "feedItems": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "n"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "Channel_feedItems_feedChannels_MediaContent",
+          "attributeName": "feedItems",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "nanobanana2Calls": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "Nanobanana2Call",
+          "linkName": "Channel_nanobanana2Calls_channel_Nanobanana2Call",
+          "attributeName": "nanobanana2Calls",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "fangzhouCalls": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "FangzhouCall",
+          "linkName": "Channel_fangzhouCalls_channel_FangzhouCall",
+          "attributeName": "fangzhouCalls",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "initialReferenceImage": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "Channel_initialReferenceImage_channelsAsReference_MediaContent",
+          "attributeName": "initialReferenceImage",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "chatRoom": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "ChatRoom",
+          "linkName": "Channel_chatRoom_channel_ChatRoom",
+          "attributeName": "chatRoom",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "Channel",
+      "resolvedBaseRecordName": "Channel"
+    },
+    "MediaContent": {
+      "table": "MediaContent",
+      "attributes": {
+        "mediaType": {
+          "name": "mediaType",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "med_med_12"
+        },
+        "sourceType": {
+          "name": "sourceType",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "med_sou_13"
+        },
+        "url": {
+          "name": "url",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "med_url_14"
+        },
+        "fileKey": {
+          "name": "fileKey",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "med_fil_15"
+        },
+        "fileName": {
+          "name": "fileName",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "med_fil_16"
+        },
+        "contentType": {
+          "name": "contentType",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "med_con_17"
+        },
+        "generationPrompt": {
+          "name": "generationPrompt",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "med_gen_18"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "med_cre_19"
+        },
+        "likeCount": {
+          "name": "likeCount",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "med_lik_20"
+        },
+        "_MediaContent_bound_sourceRecordId": {
+          "name": "_MediaContent_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "med__21"
+        },
+        "_MediaContent_bound_transformIndex": {
+          "name": "_MediaContent_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "med__22"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "med_id_23"
+        },
+        "channel": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_mediaContents_channel_MediaContent",
+          "attributeName": "channel",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "uploader": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "User_mediaContents_uploader_MediaContent",
+          "attributeName": "uploader",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "feedChannels": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "n"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_feedItems_feedChannels_MediaContent",
+          "attributeName": "feedChannels",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "sourceImage": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_sourceImage_derivedContents_MediaContent",
+          "attributeName": "sourceImage",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "derivedContents": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_sourceImage_derivedContents_MediaContent",
+          "attributeName": "derivedContents",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "nanobanana2Call": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Nanobanana2Call",
+          "linkName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call",
+          "attributeName": "nanobanana2Call",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "fangzhouCall": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "FangzhouCall",
+          "linkName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall",
+          "attributeName": "fangzhouCall",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "channelsAsReference": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_initialReferenceImage_channelsAsReference_MediaContent",
+          "attributeName": "channelsAsReference",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "comments": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "Comment",
+          "linkName": "MediaContent_comments_mediaContent_Comment",
+          "attributeName": "comments",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        },
+        "likedByUsers": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "n"
+          ],
+          "recordName": "User",
+          "linkName": "UserMediaContentLikeRelation",
+          "attributeName": "likedByUsers",
+          "isSource": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "MediaContent",
+      "resolvedBaseRecordName": "MediaContent"
+    },
+    "Nanobanana2Call": {
+      "table": "Nanobanana2Call",
+      "attributes": {
+        "status": {
+          "name": "status",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "nan_sta_24"
+        },
+        "externalId": {
+          "name": "externalId",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "nan_ext_25"
+        },
+        "requestParams": {
+          "name": "requestParams",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "nan_req_26"
+        },
+        "responseData": {
+          "name": "responseData",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "nan_res_27"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "nan_cre_28"
+        },
+        "startedAt": {
+          "name": "startedAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "nan_sta_29"
+        },
+        "completedAt": {
+          "name": "completedAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "nan_com_30"
+        },
+        "attempts": {
+          "name": "attempts",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "nan_att_31"
+        },
+        "error": {
+          "name": "error",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "nan_err_32"
+        },
+        "_Nanobanana2Call_bound_sourceRecordId": {
+          "name": "_Nanobanana2Call_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "nan__33"
+        },
+        "_Nanobanana2Call_bound_transformIndex": {
+          "name": "_Nanobanana2Call_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "nan__34"
+        },
+        "_Nanobanana2Call_status_bound_currentState": {
+          "name": "_Nanobanana2Call_status_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "nan__35"
+        },
+        "_Nanobanana2Call_externalId_bound_currentState": {
+          "name": "_Nanobanana2Call_externalId_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "nan__36"
+        },
+        "_Nanobanana2Call_responseData_bound_currentState": {
+          "name": "_Nanobanana2Call_responseData_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "nan__37"
+        },
+        "_Nanobanana2Call_startedAt_bound_currentState": {
+          "name": "_Nanobanana2Call_startedAt_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "nan__38"
+        },
+        "_Nanobanana2Call_completedAt_bound_currentState": {
+          "name": "_Nanobanana2Call_completedAt_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "nan__39"
+        },
+        "_Nanobanana2Call_attempts_bound_currentState": {
+          "name": "_Nanobanana2Call_attempts_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "nan__40"
+        },
+        "_Nanobanana2Call_error_bound_currentState": {
+          "name": "_Nanobanana2Call_error_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "nan__41"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "nan_id_42"
+        },
+        "channel": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_nanobanana2Calls_channel_Nanobanana2Call",
+          "attributeName": "channel",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "generatedMediaContents": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call",
+          "attributeName": "generatedMediaContents",
+          "isSource": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "Nanobanana2Call",
+      "resolvedBaseRecordName": "Nanobanana2Call"
+    },
+    "Nanobanana2Event": {
+      "table": "Nanobanana2Event",
+      "attributes": {
+        "eventType": {
+          "name": "eventType",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "nan_eve_43"
+        },
+        "entityId": {
+          "name": "entityId",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "nan_ent_44"
+        },
+        "externalId": {
+          "name": "externalId",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "nan_ext_45"
+        },
+        "status": {
+          "name": "status",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "nan_sta_46"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "nan_cre_47"
+        },
+        "data": {
+          "name": "data",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "nan_dat_48"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "nan_id_49"
+        }
+      },
+      "baseRecordName": "Nanobanana2Event",
+      "resolvedBaseRecordName": "Nanobanana2Event"
+    },
+    "FangzhouCall": {
+      "table": "FangzhouCall",
+      "attributes": {
+        "status": {
+          "name": "status",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "fan_sta_50"
+        },
+        "externalId": {
+          "name": "externalId",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "fan_ext_51"
+        },
+        "requestParams": {
+          "name": "requestParams",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "fan_req_52"
+        },
+        "responseData": {
+          "name": "responseData",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "fan_res_53"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "fan_cre_54"
+        },
+        "startedAt": {
+          "name": "startedAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "fan_sta_55"
+        },
+        "completedAt": {
+          "name": "completedAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "fan_com_56"
+        },
+        "attempts": {
+          "name": "attempts",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "fan_att_57"
+        },
+        "error": {
+          "name": "error",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "fan_err_58"
+        },
+        "_FangzhouCall_bound_sourceRecordId": {
+          "name": "_FangzhouCall_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "fan__59"
+        },
+        "_FangzhouCall_bound_transformIndex": {
+          "name": "_FangzhouCall_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "fan__60"
+        },
+        "_FangzhouCall_status_bound_currentState": {
+          "name": "_FangzhouCall_status_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "fan__61"
+        },
+        "_FangzhouCall_externalId_bound_currentState": {
+          "name": "_FangzhouCall_externalId_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "fan__62"
+        },
+        "_FangzhouCall_responseData_bound_currentState": {
+          "name": "_FangzhouCall_responseData_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "fan__63"
+        },
+        "_FangzhouCall_startedAt_bound_currentState": {
+          "name": "_FangzhouCall_startedAt_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "fan__64"
+        },
+        "_FangzhouCall_completedAt_bound_currentState": {
+          "name": "_FangzhouCall_completedAt_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "fan__65"
+        },
+        "_FangzhouCall_attempts_bound_currentState": {
+          "name": "_FangzhouCall_attempts_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "fan__66"
+        },
+        "_FangzhouCall_error_bound_currentState": {
+          "name": "_FangzhouCall_error_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "fan__67"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "fan_id_68"
+        },
+        "channel": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_fangzhouCalls_channel_FangzhouCall",
+          "attributeName": "channel",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "generatedMediaContent": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall",
+          "attributeName": "generatedMediaContent",
+          "isSource": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "FangzhouCall",
+      "resolvedBaseRecordName": "FangzhouCall"
+    },
+    "FangzhouEvent": {
+      "table": "FangzhouEvent",
+      "attributes": {
+        "eventType": {
+          "name": "eventType",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "fan_eve_69"
+        },
+        "entityId": {
+          "name": "entityId",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "fan_ent_70"
+        },
+        "externalId": {
+          "name": "externalId",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "fan_ext_71"
+        },
+        "status": {
+          "name": "status",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "fan_sta_72"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "fan_cre_73"
+        },
+        "data": {
+          "name": "data",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "fan_dat_74"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "fan_id_75"
+        }
+      },
+      "baseRecordName": "FangzhouEvent",
+      "resolvedBaseRecordName": "FangzhouEvent"
+    },
+    "ChatRoom": {
+      "table": "ChatRoom",
+      "attributes": {
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "cha_cre_76"
+        },
+        "_ChatRoom_bound_sourceRecordId": {
+          "name": "_ChatRoom_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "cha__77"
+        },
+        "_ChatRoom_bound_transformIndex": {
+          "name": "_ChatRoom_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "cha__78"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_id_79"
+        },
+        "channel": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_chatRoom_channel_ChatRoom",
+          "attributeName": "channel",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "members": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "n"
+          ],
+          "recordName": "User",
+          "linkName": "User_joinedChatRooms_members_ChatRoom",
+          "attributeName": "members",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "messages": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "ChatMessage",
+          "linkName": "ChatRoom_messages_chatRoom_ChatMessage",
+          "attributeName": "messages",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "ChatRoom",
+      "resolvedBaseRecordName": "ChatRoom"
+    },
+    "ChatMessage": {
+      "table": "ChatMessage",
+      "attributes": {
+        "content": {
+          "name": "content",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "cha_con_80"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "cha_cre_81"
+        },
+        "_ChatMessage_bound_sourceRecordId": {
+          "name": "_ChatMessage_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "cha__82"
+        },
+        "_ChatMessage_bound_transformIndex": {
+          "name": "_ChatMessage_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "cha__83"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_id_84"
+        },
+        "sender": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "User_chatMessages_sender_ChatMessage",
+          "attributeName": "sender",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "chatRoom": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "ChatRoom",
+          "linkName": "ChatRoom_messages_chatRoom_ChatMessage",
+          "attributeName": "chatRoom",
+          "isSource": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "ChatMessage",
+      "resolvedBaseRecordName": "ChatMessage"
+    },
+    "Comment": {
+      "table": "Comment",
+      "attributes": {
+        "commentType": {
+          "name": "commentType",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "com_com_85"
+        },
+        "textContent": {
+          "name": "textContent",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "com_tex_86"
+        },
+        "voiceUrl": {
+          "name": "voiceUrl",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "com_voi_87"
+        },
+        "voiceDuration": {
+          "name": "voiceDuration",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "com_voi_88"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "com_cre_89"
+        },
+        "_isDeleted_": {
+          "name": "_isDeleted_",
+          "type": "boolean",
+          "fieldType": "BOOLEAN",
+          "field": "com__90"
+        },
+        "_Comment_bound_sourceRecordId": {
+          "name": "_Comment_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "com__91"
+        },
+        "_Comment_bound_transformIndex": {
+          "name": "_Comment_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "com__92"
+        },
+        "_Comment__isDeleted__bound_currentState": {
+          "name": "_Comment__isDeleted__bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "com__93"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "com_id_94"
+        },
+        "mediaContent": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_comments_mediaContent_Comment",
+          "attributeName": "mediaContent",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "author": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "User_comments_author_Comment",
+          "attributeName": "author",
+          "isSource": false,
+          "isFilteredRelation": false
+        },
+        "volcDoubaoASRCalls": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "VolcDoubaoASRCall",
+          "linkName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall",
+          "attributeName": "volcDoubaoASRCalls",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "Comment",
+      "resolvedBaseRecordName": "Comment"
+    },
+    "VolcDoubaoASRCall": {
+      "table": "VolcDoubaoASRCall",
+      "attributes": {
+        "status": {
+          "name": "status",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "vol_sta_95"
+        },
+        "externalId": {
+          "name": "externalId",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "vol_ext_96"
+        },
+        "requestParams": {
+          "name": "requestParams",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "vol_req_97"
+        },
+        "responseData": {
+          "name": "responseData",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "vol_res_98"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "vol_cre_99"
+        },
+        "startedAt": {
+          "name": "startedAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "vol_sta_100"
+        },
+        "completedAt": {
+          "name": "completedAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "vol_com_101"
+        },
+        "attempts": {
+          "name": "attempts",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "vol_att_102"
+        },
+        "error": {
+          "name": "error",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "vol_err_103"
+        },
+        "_VolcDoubaoASRCall_bound_sourceRecordId": {
+          "name": "_VolcDoubaoASRCall_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "vol__104"
+        },
+        "_VolcDoubaoASRCall_bound_transformIndex": {
+          "name": "_VolcDoubaoASRCall_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "vol__105"
+        },
+        "_VolcDoubaoASRCall_status_bound_currentState": {
+          "name": "_VolcDoubaoASRCall_status_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "vol__106"
+        },
+        "_VolcDoubaoASRCall_externalId_bound_currentState": {
+          "name": "_VolcDoubaoASRCall_externalId_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "vol__107"
+        },
+        "_VolcDoubaoASRCall_responseData_bound_currentState": {
+          "name": "_VolcDoubaoASRCall_responseData_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "vol__108"
+        },
+        "_VolcDoubaoASRCall_startedAt_bound_currentState": {
+          "name": "_VolcDoubaoASRCall_startedAt_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "vol__109"
+        },
+        "_VolcDoubaoASRCall_completedAt_bound_currentState": {
+          "name": "_VolcDoubaoASRCall_completedAt_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "vol__110"
+        },
+        "_VolcDoubaoASRCall_attempts_bound_currentState": {
+          "name": "_VolcDoubaoASRCall_attempts_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "vol__111"
+        },
+        "_VolcDoubaoASRCall_error_bound_currentState": {
+          "name": "_VolcDoubaoASRCall_error_bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "vol__112"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "vol_id_113"
+        },
+        "comment": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Comment",
+          "linkName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall",
+          "attributeName": "comment",
+          "isSource": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "VolcDoubaoASRCall",
+      "resolvedBaseRecordName": "VolcDoubaoASRCall"
+    },
+    "VolcDoubaoASREvent": {
+      "table": "VolcDoubaoASREvent",
+      "attributes": {
+        "eventType": {
+          "name": "eventType",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "vol_eve_114"
+        },
+        "entityId": {
+          "name": "entityId",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "vol_ent_115"
+        },
+        "externalId": {
+          "name": "externalId",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "vol_ext_116"
+        },
+        "status": {
+          "name": "status",
+          "type": "string",
+          "fieldType": "TEXT",
+          "field": "vol_sta_117"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "vol_cre_118"
+        },
+        "data": {
+          "name": "data",
+          "type": "object",
+          "fieldType": "JSON",
+          "field": "vol_dat_119"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "vol_id_120"
+        }
+      },
+      "baseRecordName": "VolcDoubaoASREvent",
+      "resolvedBaseRecordName": "VolcDoubaoASREvent"
+    },
+    "_Activity_": {
+      "table": "_Activity_",
+      "attributes": {
+        "name": {
+          "name": "name",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "_act_121"
+        },
+        "uuid": {
+          "name": "uuid",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "_act_122"
+        },
+        "state": {
+          "name": "state",
+          "type": "object",
+          "collection": false,
+          "fieldType": "JSON",
+          "field": "_act_123"
+        },
+        "refs": {
+          "name": "refs",
+          "type": "object",
+          "collection": false,
+          "fieldType": "JSON",
+          "field": "_act_124"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "_act_125"
+        },
+        "interaction": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "n"
+          ],
+          "recordName": "_Interaction_",
+          "linkName": "activityInteraction",
+          "attributeName": "interaction",
+          "isSource": true,
+          "isReliance": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "_Activity_",
+      "resolvedBaseRecordName": "_Activity_"
+    },
+    "_Interaction_": {
+      "table": "_Interaction_",
+      "attributes": {
+        "interactionId": {
+          "name": "interactionId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "_int_126"
+        },
+        "interactionName": {
+          "name": "interactionName",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "_int_127"
+        },
+        "payload": {
+          "name": "payload",
+          "type": "object",
+          "collection": false,
+          "fieldType": "JSON",
+          "field": "_int_128"
+        },
+        "user": {
+          "name": "user",
+          "type": "object",
+          "collection": false,
+          "fieldType": "JSON",
+          "field": "_int_129"
+        },
+        "query": {
+          "name": "query",
+          "type": "object",
+          "collection": false,
+          "fieldType": "JSON",
+          "field": "_int_130"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "_int_131"
+        },
+        "activity": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "_Activity_",
+          "linkName": "activityInteraction",
+          "attributeName": "activity",
+          "isSource": false,
+          "isFilteredRelation": false
+        }
+      },
+      "baseRecordName": "_Interaction_",
+      "resolvedBaseRecordName": "_Interaction_"
+    },
+    "_Dictionary_": {
+      "table": "_Dictionary_",
+      "attributes": {
+        "key": {
+          "name": "key",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "_dic_132"
+        },
+        "value": {
+          "name": "value",
+          "type": "json",
+          "collection": false,
+          "fieldType": "json",
+          "field": "_dic_133"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "_dic_134"
+        }
+      },
+      "baseRecordName": "_Dictionary_",
+      "resolvedBaseRecordName": "_Dictionary_"
+    },
+    "_System_": {
+      "table": "_System_",
+      "attributes": {
+        "concept": {
+          "name": "concept",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "_sys_135"
+        },
+        "key": {
+          "name": "key",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "_sys_136"
+        },
+        "value": {
+          "name": "value",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "_sys_137"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "_sys_138"
+        }
+      },
+      "baseRecordName": "_System_",
+      "resolvedBaseRecordName": "_System_"
+    },
+    "User_channels_creator_Channel": {
+      "table": "Channel",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "use_cha_139"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "User_channels_creator_Channel_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "cha_cre_174",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "User_channels_creator_Channel_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "User_channels_creator_Channel",
+      "resolvedBaseRecordName": "User_channels_creator_Channel"
+    },
+    "Channel_mediaContents_channel_MediaContent": {
+      "table": "MediaContent",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_med_140"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_mediaContents_channel_MediaContent_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "med_cha_175",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "Channel_mediaContents_channel_MediaContent_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "Channel_mediaContents_channel_MediaContent",
+      "resolvedBaseRecordName": "Channel_mediaContents_channel_MediaContent"
+    },
+    "User_mediaContents_uploader_MediaContent": {
+      "table": "MediaContent",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "use_med_141"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "User_mediaContents_uploader_MediaContent_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "med_upl_176",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "User_mediaContents_uploader_MediaContent_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "User_mediaContents_uploader_MediaContent",
+      "resolvedBaseRecordName": "User_mediaContents_uploader_MediaContent"
+    },
+    "Channel_feedItems_feedChannels_MediaContent": {
+      "table": "Channel_feedItems_feedChannels_MediaContent",
+      "attributes": {
+        "displayOrder": {
+          "name": "displayOrder",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "cha_fee_142"
+        },
+        "addedAt": {
+          "name": "addedAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "cha_fee_143"
+        },
+        "_isDeleted_": {
+          "name": "_isDeleted_",
+          "type": "boolean",
+          "fieldType": "BOOLEAN",
+          "field": "cha_fee_144"
+        },
+        "_Channel_feedItems_feedChannels_MediaContent_bound_sourceRecordId": {
+          "name": "_Channel_feedItems_feedChannels_MediaContent_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "cha_fee_145"
+        },
+        "_Channel_feedItems_feedChannels_MediaContent_bound_transformIndex": {
+          "name": "_Channel_feedItems_feedChannels_MediaContent_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "cha_fee_146"
+        },
+        "_Channel_feedItems_feedChannels_MediaContent__isDeleted__bound_currentState": {
+          "name": "_Channel_feedItems_feedChannels_MediaContent__isDeleted__bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "cha_fee_147"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_fee_148"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_feedItems_feedChannels_MediaContent_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "cha_fee_177",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "Channel_feedItems_feedChannels_MediaContent_target",
+          "attributeName": "target",
+          "isSource": true,
+          "field": "cha_fee_178",
+          "fieldType": "UUID"
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "Channel_feedItems_feedChannels_MediaContent",
+      "resolvedBaseRecordName": "Channel_feedItems_feedChannels_MediaContent"
+    },
+    "MediaContent_sourceImage_derivedContents_MediaContent": {
+      "table": "MediaContent",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "med_sou_149"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_sourceImage_derivedContents_MediaContent_source",
+          "attributeName": "source",
+          "isSource": true
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_sourceImage_derivedContents_MediaContent_target",
+          "attributeName": "target",
+          "isSource": true,
+          "field": "med_sou_179",
+          "fieldType": "UUID"
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "MediaContent_sourceImage_derivedContents_MediaContent",
+      "resolvedBaseRecordName": "MediaContent_sourceImage_derivedContents_MediaContent"
+    },
+    "Channel_nanobanana2Calls_channel_Nanobanana2Call": {
+      "table": "Nanobanana2Call",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_nan_150"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_nanobanana2Calls_channel_Nanobanana2Call_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "nan_cha_180",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "Nanobanana2Call",
+          "linkName": "Channel_nanobanana2Calls_channel_Nanobanana2Call_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "Channel_nanobanana2Calls_channel_Nanobanana2Call",
+      "resolvedBaseRecordName": "Channel_nanobanana2Calls_channel_Nanobanana2Call"
+    },
+    "Channel_fangzhouCalls_channel_FangzhouCall": {
+      "table": "FangzhouCall",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_fan_151"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_fangzhouCalls_channel_FangzhouCall_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "fan_cha_181",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "FangzhouCall",
+          "linkName": "Channel_fangzhouCalls_channel_FangzhouCall_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "Channel_fangzhouCalls_channel_FangzhouCall",
+      "resolvedBaseRecordName": "Channel_fangzhouCalls_channel_FangzhouCall"
+    },
+    "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call": {
+      "table": "MediaContent",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "med_nan_152"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call_source",
+          "attributeName": "source",
+          "isSource": true
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Nanobanana2Call",
+          "linkName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call_target",
+          "attributeName": "target",
+          "isSource": true,
+          "field": "med_nan_182",
+          "fieldType": "UUID"
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call",
+      "resolvedBaseRecordName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call"
+    },
+    "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall": {
+      "table": "MediaContent",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "med_fan_153"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall_source",
+          "attributeName": "source",
+          "isSource": true
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "FangzhouCall",
+          "linkName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall_target",
+          "attributeName": "target",
+          "isSource": true,
+          "field": "med_fan_183",
+          "fieldType": "UUID"
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall",
+      "resolvedBaseRecordName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall"
+    },
+    "Channel_initialReferenceImage_channelsAsReference_MediaContent": {
+      "table": "Channel",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_ini_154"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_initialReferenceImage_channelsAsReference_MediaContent_source",
+          "attributeName": "source",
+          "isSource": true
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "Channel_initialReferenceImage_channelsAsReference_MediaContent_target",
+          "attributeName": "target",
+          "isSource": true,
+          "field": "cha_ini_184",
+          "fieldType": "UUID"
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "Channel_initialReferenceImage_channelsAsReference_MediaContent",
+      "resolvedBaseRecordName": "Channel_initialReferenceImage_channelsAsReference_MediaContent"
+    },
+    "Channel_chatRoom_channel_ChatRoom": {
+      "table": "Channel",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_cha_155"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "Channel",
+          "linkName": "Channel_chatRoom_channel_ChatRoom_source",
+          "attributeName": "source",
+          "isSource": true
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "ChatRoom",
+          "linkName": "Channel_chatRoom_channel_ChatRoom_target",
+          "attributeName": "target",
+          "isSource": true,
+          "field": "cha_cha_185",
+          "fieldType": "UUID"
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "Channel_chatRoom_channel_ChatRoom",
+      "resolvedBaseRecordName": "Channel_chatRoom_channel_ChatRoom"
+    },
+    "User_joinedChatRooms_members_ChatRoom": {
+      "table": "User_joinedChatRooms_members_ChatRoom",
+      "attributes": {
+        "joinedAt": {
+          "name": "joinedAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "use_joi_156"
+        },
+        "_isDeleted_": {
+          "name": "_isDeleted_",
+          "type": "boolean",
+          "fieldType": "BOOLEAN",
+          "field": "use_joi_157"
+        },
+        "_User_joinedChatRooms_members_ChatRoom_bound_sourceRecordId": {
+          "name": "_User_joinedChatRooms_members_ChatRoom_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "use_joi_158"
+        },
+        "_User_joinedChatRooms_members_ChatRoom_bound_transformIndex": {
+          "name": "_User_joinedChatRooms_members_ChatRoom_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "use_joi_159"
+        },
+        "_User_joinedChatRooms_members_ChatRoom__isDeleted__bound_currentState": {
+          "name": "_User_joinedChatRooms_members_ChatRoom__isDeleted__bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "use_joi_160"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "use_joi_161"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "User_joinedChatRooms_members_ChatRoom_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "use_joi_186",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "ChatRoom",
+          "linkName": "User_joinedChatRooms_members_ChatRoom_target",
+          "attributeName": "target",
+          "isSource": true,
+          "field": "use_joi_187",
+          "fieldType": "UUID"
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "User_joinedChatRooms_members_ChatRoom",
+      "resolvedBaseRecordName": "User_joinedChatRooms_members_ChatRoom"
+    },
+    "User_chatMessages_sender_ChatMessage": {
+      "table": "ChatMessage",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "use_cha_162"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "User_chatMessages_sender_ChatMessage_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "cha_sen_188",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "ChatMessage",
+          "linkName": "User_chatMessages_sender_ChatMessage_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "User_chatMessages_sender_ChatMessage",
+      "resolvedBaseRecordName": "User_chatMessages_sender_ChatMessage"
+    },
+    "ChatRoom_messages_chatRoom_ChatMessage": {
+      "table": "ChatMessage",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "cha_mes_163"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "ChatRoom",
+          "linkName": "ChatRoom_messages_chatRoom_ChatMessage_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "cha_cha_189",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "ChatMessage",
+          "linkName": "ChatRoom_messages_chatRoom_ChatMessage_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "ChatRoom_messages_chatRoom_ChatMessage",
+      "resolvedBaseRecordName": "ChatRoom_messages_chatRoom_ChatMessage"
+    },
+    "MediaContent_comments_mediaContent_Comment": {
+      "table": "Comment",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "med_com_164"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "MediaContent_comments_mediaContent_Comment_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "com_med_190",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "Comment",
+          "linkName": "MediaContent_comments_mediaContent_Comment_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "MediaContent_comments_mediaContent_Comment",
+      "resolvedBaseRecordName": "MediaContent_comments_mediaContent_Comment"
+    },
+    "User_comments_author_Comment": {
+      "table": "Comment",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "use_com_165"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "User_comments_author_Comment_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "com_aut_191",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "Comment",
+          "linkName": "User_comments_author_Comment_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "User_comments_author_Comment",
+      "resolvedBaseRecordName": "User_comments_author_Comment"
+    },
+    "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall": {
+      "table": "VolcDoubaoASRCall",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "com_vol_166"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "Comment",
+          "linkName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "vol_com_192",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "VolcDoubaoASRCall",
+          "linkName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall",
+      "resolvedBaseRecordName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall"
+    },
+    "UserMediaContentLikeRelation": {
+      "table": "UserMediaContentLikeRelation",
+      "attributes": {
+        "createdAt": {
+          "name": "createdAt",
+          "type": "number",
+          "fieldType": "INT",
+          "field": "use_cre_167"
+        },
+        "_isDeleted_": {
+          "name": "_isDeleted_",
+          "type": "boolean",
+          "fieldType": "BOOLEAN",
+          "field": "use__168"
+        },
+        "_UserMediaContentLikeRelation_bound_sourceRecordId": {
+          "name": "_UserMediaContentLikeRelation_bound_sourceRecordId",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "use__169"
+        },
+        "_UserMediaContentLikeRelation_bound_transformIndex": {
+          "name": "_UserMediaContentLikeRelation_bound_transformIndex",
+          "type": "number",
+          "collection": false,
+          "fieldType": "INT",
+          "field": "use__170"
+        },
+        "_UserMediaContentLikeRelation__isDeleted__bound_currentState": {
+          "name": "_UserMediaContentLikeRelation__isDeleted__bound_currentState",
+          "type": "string",
+          "collection": false,
+          "fieldType": "TEXT",
+          "field": "use__171"
+        },
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "use_id_172"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "User",
+          "linkName": "UserMediaContentLikeRelation_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "use_sou_193",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "MediaContent",
+          "linkName": "UserMediaContentLikeRelation_target",
+          "attributeName": "target",
+          "isSource": true,
+          "field": "use_tar_194",
+          "fieldType": "UUID"
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "UserMediaContentLikeRelation",
+      "resolvedBaseRecordName": "UserMediaContentLikeRelation"
+    },
+    "activityInteraction": {
+      "table": "_Interaction_",
+      "attributes": {
+        "id": {
+          "name": "id",
+          "type": "id",
+          "fieldType": "UUID",
+          "field": "act_id_173"
+        },
+        "source": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "n",
+            "1"
+          ],
+          "recordName": "_Activity_",
+          "linkName": "activityInteraction_source",
+          "attributeName": "source",
+          "isSource": true,
+          "field": "_int_195",
+          "fieldType": "UUID"
+        },
+        "target": {
+          "type": "id",
+          "isRecord": true,
+          "relType": [
+            "1",
+            "1"
+          ],
+          "recordName": "_Interaction_",
+          "linkName": "activityInteraction_target",
+          "attributeName": "target",
+          "isSource": true
+        }
+      },
+      "isRelation": true,
+      "baseRecordName": "activityInteraction",
+      "resolvedBaseRecordName": "activityInteraction"
+    }
+  }
+}

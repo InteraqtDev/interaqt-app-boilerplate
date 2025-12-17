@@ -1,0 +1,1160 @@
+{
+  "entities": {
+    "User": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "username",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "passwordHash",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        }
+      ],
+      "relations": [
+        {
+          "propertyName": "channels",
+          "targetEntity": "Channel",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "User_channels_creator_Channel"
+        },
+        {
+          "propertyName": "mediaContents",
+          "targetEntity": "MediaContent",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "User_mediaContents_uploader_MediaContent"
+        },
+        {
+          "propertyName": "joinedChatRooms",
+          "targetEntity": "ChatRoom",
+          "relationType": "n:n",
+          "isSource": true,
+          "relationName": "User_joinedChatRooms_members_ChatRoom",
+          "relationProperties": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "joinedAt",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "propertyName": "chatMessages",
+          "targetEntity": "ChatMessage",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "User_chatMessages_sender_ChatMessage"
+        },
+        {
+          "propertyName": "comments",
+          "targetEntity": "Comment",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "User_comments_author_Comment"
+        },
+        {
+          "propertyName": "likedMediaContents",
+          "targetEntity": "MediaContent",
+          "relationType": "n:n",
+          "isSource": true,
+          "relationName": "UserMediaContentLikeRelation",
+          "relationProperties": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "createdAt",
+              "type": "number"
+            }
+          ]
+        }
+      ]
+    },
+    "Channel": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "initialPrompt",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        }
+      ],
+      "relations": [
+        {
+          "propertyName": "creator",
+          "targetEntity": "User",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "User_channels_creator_Channel"
+        },
+        {
+          "propertyName": "mediaContents",
+          "targetEntity": "MediaContent",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "Channel_mediaContents_channel_MediaContent"
+        },
+        {
+          "propertyName": "feedItems",
+          "targetEntity": "MediaContent",
+          "relationType": "n:n",
+          "isSource": true,
+          "relationName": "Channel_feedItems_feedChannels_MediaContent",
+          "relationProperties": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "displayOrder",
+              "type": "number"
+            },
+            {
+              "name": "addedAt",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "propertyName": "nanobanana2Calls",
+          "targetEntity": "Nanobanana2Call",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "Channel_nanobanana2Calls_channel_Nanobanana2Call"
+        },
+        {
+          "propertyName": "fangzhouCalls",
+          "targetEntity": "FangzhouCall",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "Channel_fangzhouCalls_channel_FangzhouCall"
+        },
+        {
+          "propertyName": "initialReferenceImage",
+          "targetEntity": "MediaContent",
+          "relationType": "n:1",
+          "isSource": true,
+          "relationName": "Channel_initialReferenceImage_channelsAsReference_MediaContent"
+        },
+        {
+          "propertyName": "chatRoom",
+          "targetEntity": "ChatRoom",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "Channel_chatRoom_channel_ChatRoom"
+        }
+      ]
+    },
+    "MediaContent": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "mediaType",
+          "type": "string"
+        },
+        {
+          "name": "sourceType",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "name": "fileKey",
+          "type": "string"
+        },
+        {
+          "name": "fileName",
+          "type": "string"
+        },
+        {
+          "name": "contentType",
+          "type": "string"
+        },
+        {
+          "name": "generationPrompt",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        },
+        {
+          "name": "likeCount",
+          "type": "number"
+        }
+      ],
+      "relations": [
+        {
+          "propertyName": "channel",
+          "targetEntity": "Channel",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "Channel_mediaContents_channel_MediaContent"
+        },
+        {
+          "propertyName": "uploader",
+          "targetEntity": "User",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "User_mediaContents_uploader_MediaContent"
+        },
+        {
+          "propertyName": "feedChannels",
+          "targetEntity": "Channel",
+          "relationType": "n:n",
+          "isSource": false,
+          "relationName": "Channel_feedItems_feedChannels_MediaContent",
+          "relationProperties": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "displayOrder",
+              "type": "number"
+            },
+            {
+              "name": "addedAt",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "propertyName": "sourceImage",
+          "targetEntity": "MediaContent",
+          "relationType": "n:1",
+          "isSource": true,
+          "relationName": "MediaContent_sourceImage_derivedContents_MediaContent"
+        },
+        {
+          "propertyName": "derivedContents",
+          "targetEntity": "MediaContent",
+          "relationType": "1:n",
+          "isSource": false,
+          "relationName": "MediaContent_sourceImage_derivedContents_MediaContent"
+        },
+        {
+          "propertyName": "nanobanana2Call",
+          "targetEntity": "Nanobanana2Call",
+          "relationType": "n:1",
+          "isSource": true,
+          "relationName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call"
+        },
+        {
+          "propertyName": "fangzhouCall",
+          "targetEntity": "FangzhouCall",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall"
+        },
+        {
+          "propertyName": "channelsAsReference",
+          "targetEntity": "Channel",
+          "relationType": "1:n",
+          "isSource": false,
+          "relationName": "Channel_initialReferenceImage_channelsAsReference_MediaContent"
+        },
+        {
+          "propertyName": "comments",
+          "targetEntity": "Comment",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "MediaContent_comments_mediaContent_Comment"
+        },
+        {
+          "propertyName": "likedByUsers",
+          "targetEntity": "User",
+          "relationType": "n:n",
+          "isSource": false,
+          "relationName": "UserMediaContentLikeRelation",
+          "relationProperties": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "createdAt",
+              "type": "number"
+            }
+          ]
+        }
+      ]
+    },
+    "Nanobanana2Call": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "externalId",
+          "type": "string"
+        },
+        {
+          "name": "requestParams",
+          "type": "object"
+        },
+        {
+          "name": "responseData",
+          "type": "object"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        },
+        {
+          "name": "startedAt",
+          "type": "number"
+        },
+        {
+          "name": "completedAt",
+          "type": "number"
+        },
+        {
+          "name": "attempts",
+          "type": "number"
+        },
+        {
+          "name": "error",
+          "type": "object"
+        }
+      ],
+      "relations": [
+        {
+          "propertyName": "channel",
+          "targetEntity": "Channel",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "Channel_nanobanana2Calls_channel_Nanobanana2Call"
+        },
+        {
+          "propertyName": "generatedMediaContents",
+          "targetEntity": "MediaContent",
+          "relationType": "1:n",
+          "isSource": false,
+          "relationName": "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call"
+        }
+      ]
+    },
+    "Nanobanana2Event": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "eventType",
+          "type": "string"
+        },
+        {
+          "name": "entityId",
+          "type": "string"
+        },
+        {
+          "name": "externalId",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        },
+        {
+          "name": "data",
+          "type": "object"
+        }
+      ],
+      "relations": []
+    },
+    "FangzhouCall": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "externalId",
+          "type": "string"
+        },
+        {
+          "name": "requestParams",
+          "type": "object"
+        },
+        {
+          "name": "responseData",
+          "type": "object"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        },
+        {
+          "name": "startedAt",
+          "type": "number"
+        },
+        {
+          "name": "completedAt",
+          "type": "number"
+        },
+        {
+          "name": "attempts",
+          "type": "number"
+        },
+        {
+          "name": "error",
+          "type": "object"
+        }
+      ],
+      "relations": [
+        {
+          "propertyName": "channel",
+          "targetEntity": "Channel",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "Channel_fangzhouCalls_channel_FangzhouCall"
+        },
+        {
+          "propertyName": "generatedMediaContent",
+          "targetEntity": "MediaContent",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall"
+        }
+      ]
+    },
+    "FangzhouEvent": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "eventType",
+          "type": "string"
+        },
+        {
+          "name": "entityId",
+          "type": "string"
+        },
+        {
+          "name": "externalId",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        },
+        {
+          "name": "data",
+          "type": "object"
+        }
+      ],
+      "relations": []
+    },
+    "ChatRoom": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        }
+      ],
+      "relations": [
+        {
+          "propertyName": "channel",
+          "targetEntity": "Channel",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "Channel_chatRoom_channel_ChatRoom"
+        },
+        {
+          "propertyName": "members",
+          "targetEntity": "User",
+          "relationType": "n:n",
+          "isSource": false,
+          "relationName": "User_joinedChatRooms_members_ChatRoom",
+          "relationProperties": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "joinedAt",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "propertyName": "messages",
+          "targetEntity": "ChatMessage",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "ChatRoom_messages_chatRoom_ChatMessage"
+        }
+      ]
+    },
+    "ChatMessage": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "content",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        }
+      ],
+      "relations": [
+        {
+          "propertyName": "sender",
+          "targetEntity": "User",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "User_chatMessages_sender_ChatMessage"
+        },
+        {
+          "propertyName": "chatRoom",
+          "targetEntity": "ChatRoom",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "ChatRoom_messages_chatRoom_ChatMessage"
+        }
+      ]
+    },
+    "Comment": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "commentType",
+          "type": "string"
+        },
+        {
+          "name": "textContent",
+          "type": "string"
+        },
+        {
+          "name": "voiceUrl",
+          "type": "string"
+        },
+        {
+          "name": "voiceDuration",
+          "type": "number"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        }
+      ],
+      "relations": [
+        {
+          "propertyName": "mediaContent",
+          "targetEntity": "MediaContent",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "MediaContent_comments_mediaContent_Comment"
+        },
+        {
+          "propertyName": "author",
+          "targetEntity": "User",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "User_comments_author_Comment"
+        },
+        {
+          "propertyName": "volcDoubaoASRCalls",
+          "targetEntity": "VolcDoubaoASRCall",
+          "relationType": "1:n",
+          "isSource": true,
+          "relationName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall"
+        }
+      ]
+    },
+    "VolcDoubaoASRCall": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "externalId",
+          "type": "string"
+        },
+        {
+          "name": "requestParams",
+          "type": "object"
+        },
+        {
+          "name": "responseData",
+          "type": "object"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        },
+        {
+          "name": "startedAt",
+          "type": "number"
+        },
+        {
+          "name": "completedAt",
+          "type": "number"
+        },
+        {
+          "name": "attempts",
+          "type": "number"
+        },
+        {
+          "name": "error",
+          "type": "object"
+        }
+      ],
+      "relations": [
+        {
+          "propertyName": "comment",
+          "targetEntity": "Comment",
+          "relationType": "n:1",
+          "isSource": false,
+          "relationName": "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall"
+        }
+      ]
+    },
+    "VolcDoubaoASREvent": {
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "eventType",
+          "type": "string"
+        },
+        {
+          "name": "entityId",
+          "type": "string"
+        },
+        {
+          "name": "externalId",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        },
+        {
+          "name": "data",
+          "type": "object"
+        }
+      ],
+      "relations": []
+    }
+  },
+  "relations": {
+    "User_channels_creator_Channel": {
+      "source": "User",
+      "target": "Channel",
+      "type": "1:n",
+      "sourceProperty": "channels",
+      "targetProperty": "creator",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "Channel_mediaContents_channel_MediaContent": {
+      "source": "Channel",
+      "target": "MediaContent",
+      "type": "1:n",
+      "sourceProperty": "mediaContents",
+      "targetProperty": "channel",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "User_mediaContents_uploader_MediaContent": {
+      "source": "User",
+      "target": "MediaContent",
+      "type": "1:n",
+      "sourceProperty": "mediaContents",
+      "targetProperty": "uploader",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "Channel_feedItems_feedChannels_MediaContent": {
+      "source": "Channel",
+      "target": "MediaContent",
+      "type": "n:n",
+      "sourceProperty": "feedItems",
+      "targetProperty": "feedChannels",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "displayOrder",
+          "type": "number"
+        },
+        {
+          "name": "addedAt",
+          "type": "number"
+        }
+      ]
+    },
+    "MediaContent_sourceImage_derivedContents_MediaContent": {
+      "source": "MediaContent",
+      "target": "MediaContent",
+      "type": "n:1",
+      "sourceProperty": "sourceImage",
+      "targetProperty": "derivedContents",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "Channel_nanobanana2Calls_channel_Nanobanana2Call": {
+      "source": "Channel",
+      "target": "Nanobanana2Call",
+      "type": "1:n",
+      "sourceProperty": "nanobanana2Calls",
+      "targetProperty": "channel",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "Channel_fangzhouCalls_channel_FangzhouCall": {
+      "source": "Channel",
+      "target": "FangzhouCall",
+      "type": "1:n",
+      "sourceProperty": "fangzhouCalls",
+      "targetProperty": "channel",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "MediaContent_nanobanana2Call_generatedMediaContents_Nanobanana2Call": {
+      "source": "MediaContent",
+      "target": "Nanobanana2Call",
+      "type": "n:1",
+      "sourceProperty": "nanobanana2Call",
+      "targetProperty": "generatedMediaContents",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "MediaContent_fangzhouCall_generatedMediaContent_FangzhouCall": {
+      "source": "MediaContent",
+      "target": "FangzhouCall",
+      "type": "1:1",
+      "sourceProperty": "fangzhouCall",
+      "targetProperty": "generatedMediaContent",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "Channel_initialReferenceImage_channelsAsReference_MediaContent": {
+      "source": "Channel",
+      "target": "MediaContent",
+      "type": "n:1",
+      "sourceProperty": "initialReferenceImage",
+      "targetProperty": "channelsAsReference",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "Channel_chatRoom_channel_ChatRoom": {
+      "source": "Channel",
+      "target": "ChatRoom",
+      "type": "1:1",
+      "sourceProperty": "chatRoom",
+      "targetProperty": "channel",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "User_joinedChatRooms_members_ChatRoom": {
+      "source": "User",
+      "target": "ChatRoom",
+      "type": "n:n",
+      "sourceProperty": "joinedChatRooms",
+      "targetProperty": "members",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "joinedAt",
+          "type": "number"
+        }
+      ]
+    },
+    "User_chatMessages_sender_ChatMessage": {
+      "source": "User",
+      "target": "ChatMessage",
+      "type": "1:n",
+      "sourceProperty": "chatMessages",
+      "targetProperty": "sender",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "ChatRoom_messages_chatRoom_ChatMessage": {
+      "source": "ChatRoom",
+      "target": "ChatMessage",
+      "type": "1:n",
+      "sourceProperty": "messages",
+      "targetProperty": "chatRoom",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "MediaContent_comments_mediaContent_Comment": {
+      "source": "MediaContent",
+      "target": "Comment",
+      "type": "1:n",
+      "sourceProperty": "comments",
+      "targetProperty": "mediaContent",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "User_comments_author_Comment": {
+      "source": "User",
+      "target": "Comment",
+      "type": "1:n",
+      "sourceProperty": "comments",
+      "targetProperty": "author",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "Comment_volcDoubaoASRCalls_comment_VolcDoubaoASRCall": {
+      "source": "Comment",
+      "target": "VolcDoubaoASRCall",
+      "type": "1:n",
+      "sourceProperty": "volcDoubaoASRCalls",
+      "targetProperty": "comment",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "UserMediaContentLikeRelation": {
+      "source": "User",
+      "target": "MediaContent",
+      "type": "n:n",
+      "sourceProperty": "likedMediaContents",
+      "targetProperty": "likedByUsers",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "number"
+        }
+      ]
+    }
+  },
+  "queryInteractions": {
+    "ViewPublicChannelFeed": {
+      "dataTarget": "Channel_feedItems_feedChannels_MediaContent",
+      "dataTargetType": "relation",
+      "allowedFields": [
+        "id",
+        "displayOrder",
+        "addedAt",
+        "source",
+        "target"
+      ]
+    },
+    "ViewAllChannels": {
+      "dataTarget": "Channel",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "name",
+        "initialPrompt",
+        "createdAt",
+        "creator"
+      ]
+    },
+    "ViewOwnChannels": {
+      "dataTarget": "Channel",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "name",
+        "initialPrompt",
+        "createdAt"
+      ]
+    },
+    "ViewChannelMediaContent": {
+      "dataTarget": "MediaContent",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "mediaType",
+        "sourceType",
+        "url",
+        "fileKey",
+        "fileName",
+        "generationPrompt",
+        "createdAt",
+        "channel"
+      ]
+    },
+    "ViewOwnMediaContent": {
+      "dataTarget": "MediaContent",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "mediaType",
+        "sourceType",
+        "url",
+        "generationPrompt",
+        "createdAt",
+        "channel"
+      ]
+    },
+    "ViewChannelGenerationTasks": {
+      "dataTarget": "Nanobanana2Call",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "status",
+        "requestParams",
+        "createdAt",
+        "error",
+        "channel"
+      ]
+    },
+    "ViewNanobanana2GenerationStatus": {
+      "dataTarget": "Nanobanana2Call",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "status",
+        "error",
+        "createdAt",
+        "completedAt",
+        "responseData",
+        "channel"
+      ]
+    },
+    "ViewFangzhouGenerationStatus": {
+      "dataTarget": "FangzhouCall",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "status",
+        "error",
+        "createdAt",
+        "completedAt",
+        "responseData",
+        "channel"
+      ]
+    },
+    "ViewChatRoomMessages": {
+      "dataTarget": "ChatMessage",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "content",
+        "createdAt",
+        "sender",
+        "chatRoom"
+      ]
+    },
+    "ViewChatRoomMembership": {
+      "dataTarget": "User_joinedChatRooms_members_ChatRoom",
+      "dataTargetType": "relation",
+      "allowedFields": [
+        "id",
+        "joinedAt",
+        "source",
+        "target"
+      ]
+    },
+    "ViewAvailableChatRooms": {
+      "dataTarget": "ChatRoom",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "createdAt",
+        "channel"
+      ]
+    },
+    "ViewCommentsOnContent": {
+      "dataTarget": "Comment",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "commentType",
+        "textContent",
+        "voiceUrl",
+        "voiceDuration",
+        "createdAt",
+        "author"
+      ]
+    },
+    "ViewCommentCount": {
+      "dataTarget": "Comment",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id"
+      ]
+    },
+    "ViewVolcDoubaoASRStatus": {
+      "dataTarget": "VolcDoubaoASRCall",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "status",
+        "error",
+        "createdAt",
+        "completedAt",
+        "comment"
+      ]
+    },
+    "ViewContentWithLikeCount": {
+      "dataTarget": "MediaContent",
+      "dataTargetType": "entity",
+      "allowedFields": [
+        "id",
+        "likeCount"
+      ]
+    },
+    "ViewUserLikeStatus": {
+      "dataTarget": "UserMediaContentLikeRelation",
+      "dataTargetType": "relation",
+      "allowedFields": [
+        "id",
+        "createdAt",
+        "source",
+        "target"
+      ]
+    },
+    "ViewUserLikedContents": {
+      "dataTarget": "UserMediaContentLikeRelation",
+      "dataTargetType": "relation",
+      "allowedFields": [
+        "id",
+        "createdAt",
+        "source",
+        "target"
+      ]
+    }
+  },
+  "generatedAt": "2025-12-16T10:58:10.352Z"
+}

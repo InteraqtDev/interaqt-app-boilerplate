@@ -1,0 +1,22 @@
+# Cursor 特定的忽略文件
+# .env 文件不在此列表中，所以 Cursor 可以看到它们
+# 但 Git 仍然会忽略它们（通过 .gitignore）
+
+# 明确允许 Cursor 读取环境变量文件（覆盖 .gitignore 规则）
+!.env
+!.env.*
+!*.env
+!*.env.development
+
+# 明确允许 Cursor 访问和修改 .claude 目录下的所有文件
+!.claude/
+!.claude/**
+
+node_modules/
+dist/
+.next/
+coverage/
+appdb/
+pgdata/
+.wrangler/
+
