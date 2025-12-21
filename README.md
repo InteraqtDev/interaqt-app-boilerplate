@@ -45,7 +45,7 @@ npm i
 
 启动主组件:
 ```
-npm run dev:setup:main // 初始化主组件数据库
+npm run dev:setup:main // 生成 integration entry & 初始化主组件数据库
 npm run dev:start:main // 启动本地服务器
 ```
 
@@ -88,7 +88,7 @@ npm run reset 2 // 重置掉 task 2 以及之后的所有产出，task 1 的产�
 
 ## 5. 本地开发启动应用
 ```
-npm run dev:setup:main // 初始化数据库
+npm run dev:setup:main // 生成 integration entry & 初始化数据库
 npm run dev:start:main // 启动本地服务器
 ```
 ```

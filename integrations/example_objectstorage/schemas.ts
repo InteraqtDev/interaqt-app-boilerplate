@@ -1,7 +1,11 @@
 /**
- * Example ObjectStorage Integration Zod Schemas
- * 
- * Defines request/response schemas for object storage APIs
+ * ObjectStorage Integration Zod Schemas
+ *
+ * Defines request/response schemas for object storage API endpoints
+ * Used for:
+ * - Runtime parameter validation
+ * - TypeScript type inference
+ * - OpenAPI specification generation
  */
 
 import { z } from 'zod'
@@ -30,4 +34,3 @@ export const GetUploadUrlResponseSchema = z.object({
 
 export type GetUploadUrlRequest = z.infer<typeof GetUploadUrlRequestSchema>
 export type GetUploadUrlResponse = z.infer<typeof GetUploadUrlResponseSchema>
-

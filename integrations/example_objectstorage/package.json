@@ -1,7 +1,7 @@
 {
   "name": "@integrations/example_objectstorage",
   "version": "1.0.0",
-  "description": "Object storage integration for S3/TOS with presigned URL support",
+  "description": "Object storage integration for S3/MinIO with presigned URL support",
   "type": "module",
   "main": "index.ts",
   "exports": {
@@ -9,14 +9,10 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.927.0",
-    "@aws-sdk/s3-request-presigner": "^3.927.0",
-    "@volcengine/tos-sdk": "^2.7.5",
-    "aws4fetch": "^1.0.20"
+    "@aws-sdk/s3-request-presigner": "^3.927.0"
   },
   "peerDependencies": {
-    "interaqt": "^0.8.10",
+    "interaqt": "*",
     "zod": "^4.0.0"
   }
 }
-
-

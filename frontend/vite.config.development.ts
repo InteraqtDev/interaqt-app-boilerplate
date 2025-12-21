@@ -3,16 +3,10 @@ import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import { config } from '../config'
+import { viteDefineGlobals } from './globals'
 
-// 将 HTTP URL 转换为 WebSocket URL
-function httpToWsUrl(httpUrl: string): string {
-  return httpUrl.replace(/^http/, 'ws') + '/connection/websocket'
-}
-
-// 从配置中获取各项配置
+// 从配置中获取 main component URL 用于代理
 const mainComponentUrl = config.components.main?.publicUrl || 'http://localhost:3000'
-const centrifugoPublicUrl = config.components.communication?.middlewareDependencies?.centrifugo?.endpoints?.main?.publicUrl || 'http://localhost:8000'
-const centrifugoWsUrl = httpToWsUrl(centrifugoPublicUrl)
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -23,9 +17,7 @@ export default defineConfig({
     // basicSsl()
   ],
   define: {
-    // 使用相对路径，通过 Vite 代理解决跨域问题
-    BASE_URL: JSON.stringify('/api'),
-    CENTRIFUGO_WS_URL: JSON.stringify(centrifugoWsUrl),
+    ...viteDefineGlobals,
   },
   server: {
     // 允许从网络访问
