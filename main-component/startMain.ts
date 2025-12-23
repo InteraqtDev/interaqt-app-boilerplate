@@ -39,8 +39,6 @@ const controller = new Controller({
 await controller.setup();
 await integration.setup(controller);
 
-const users = await controller.system.storage.find(USER_ENTITY, undefined, undefined, ['id', 'username', 'email'])
-console.log('Users in system:', users)
 try {
   const storageMapJson = JSON.stringify(controller.system.storage.map, null, 2);
   const outputPath = join(process.cwd(), 'storage.map.json');
